@@ -94,6 +94,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "HookThrow",
+                    "type": "Button",
+                    "id": "1fbb87ff-3f40-45a5-923f-eb7d480083b5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HookRetrieve",
+                    "type": "Button",
+                    "id": "7b7236ed-c247-48fb-bfde-dff24e7a44b7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -547,6 +565,28 @@
                     "action": "XMove",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "312656d1-377a-4d2a-800a-b310b4ec74cc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HookRetrieve",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "405b2ffc-548e-48ab-8ce8-5533854efb77",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HookThrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
