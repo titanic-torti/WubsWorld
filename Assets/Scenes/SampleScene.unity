@@ -1408,9 +1408,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1935005932}
+  - component: {fileID: 1935005933}
   - component: {fileID: 1935005935}
   - component: {fileID: 1935005934}
-  - component: {fileID: 1935005933}
   - component: {fileID: 1935005936}
   m_Layer: 0
   m_Name: Hook
@@ -1449,6 +1449,7 @@ MonoBehaviour:
   playerScript: {fileID: 1960211979}
   hookTossSpeed: 0.1
   hookRetrieveSpeed: 0.05
+  maxAnchorDist: 2
   closenessBounds: 0.1
 --- !u!50 &1935005934
 Rigidbody2D:
@@ -1587,9 +1588,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960211981}
+  - component: {fileID: 1960211979}
   - component: {fileID: 1960211980}
   - component: {fileID: 1960211982}
-  - component: {fileID: 1960211979}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player

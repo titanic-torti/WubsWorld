@@ -32,9 +32,13 @@ public class PlayerScript : MonoBehaviour
         hookThrown = false;
     }
 
+    void Update()
+    {
+        MovePlayer();   
+    }
+
     void FixedUpdate()
     {
-        MovePlayer();
         JumpPlayer();
         ThrowHook();
         RetrieveHook();
@@ -43,7 +47,10 @@ public class PlayerScript : MonoBehaviour
     void MovePlayer()
     {
         float moveInput = _moveAction.ReadValue<float>();
-        transform.position += new Vector3(moveInput*moveSpeed , 0, 0);
+        if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0)
+        {
+            transform.position += new Vector3(moveInput*moveSpeed*Time.deltaTime, 0, 0);
+        }
     }
 
     void JumpPlayer()
@@ -63,7 +70,7 @@ public class PlayerScript : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             
             hookScript.transform.gameObject.SetActive(true);
-            hookScript.transform.position = transform.position + new Vector3(1, 1, 0);
+            hookScript.transform.position = transform.position;
             hookScript.Target(mousePos);
 
             hookThrown = true;

@@ -8,6 +8,7 @@ public class HookScript : MonoBehaviour
     Rigidbody2D _rb;
     [SerializeField] float hookTossSpeed;               // how fast the hook is tossed out
     [SerializeField] float hookRetrieveSpeed;           // how fast the hook is pulled back in
+    [SerializeField] float maxAnchorDist;               // furthest distance anchor can be from player
     [SerializeField] float closenessBounds;             // how close hook needs to be to target click before being registered as fully thrown
 
     private Vector3 _currTarget;                        // the last clicked spot to target for throw
@@ -26,7 +27,7 @@ public class HookScript : MonoBehaviour
 
     void BeingThrownToTarget()
     {
-        if (_beingThrown && WithinThrow(_currTarget))
+        if ((_beingThrown && WithinThrow(_currTarget)) || !CheckWithinMaxHookDistance())
         {
             _beingThrown = false;
             _rb.simulated = true;
@@ -52,6 +53,11 @@ public class HookScript : MonoBehaviour
     public void DrawInHook()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerScript.transform.position, hookRetrieveSpeed);
+    }
+
+    public bool CheckWithinMaxHookDistance()
+    {
+        return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
