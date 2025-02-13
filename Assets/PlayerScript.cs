@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Hook Reference")]
     [SerializeField] HookScript hookScript;
-    public bool hookThrown;
+    private bool hookThrown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
         MovePlayer();
         JumpPlayer();
         ThrowHook();
+        RetrieveHook();
     }
 
     void MovePlayer()
@@ -75,5 +76,14 @@ public class PlayerScript : MonoBehaviour
     void RetrieveHook()
     {
         float hookRetrieveInput = _hookRetrieve.ReadValue<float>();
+        if (hookRetrieveInput > 0 && hookThrown)
+        {
+            hookScript.DrawInHook();
+        }
+    }
+
+    public void SetHookThrown(bool isHookThrown)
+    {
+        hookThrown = isHookThrown;
     }
 }

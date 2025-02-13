@@ -699,8 +699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20491fc9897e01c4bb0051cb75e1b05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1960211979}
+  playerScript: {fileID: 1960211979}
   hookTossSpeed: 0.1
+  hookRetrieveSpeed: 0.05
   closenessBounds: 0.1
 --- !u!50 &1935005934
 Rigidbody2D:
@@ -844,7 +845,7 @@ GameObject:
   - component: {fileID: 1960211979}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -865,7 +866,6 @@ MonoBehaviour:
   moveSpeed: 0.1
   jumpStr: 3
   hookScript: {fileID: 1935005933}
-  hookThrown: 0
 --- !u!50 &1960211980
 Rigidbody2D:
   serializedVersion: 5

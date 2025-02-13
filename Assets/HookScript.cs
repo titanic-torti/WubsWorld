@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class HookScript : MonoBehaviour
 {
-    [SerializeField] PlayerScript player;               // reference to player script properties
+    [SerializeField] PlayerScript playerScript;         // reference to player script properties
 
     [Header("Hook Properties")]
     Rigidbody2D _rb;
     [SerializeField] float hookTossSpeed;               // how fast the hook is tossed out
+    [SerializeField] float hookRetrieveSpeed;           // how fast the hook is pulled back in
     [SerializeField] float closenessBounds;             // how close hook needs to be to target click before being registered as fully thrown
 
     private Vector3 _currTarget;                        // the last clicked spot to target for throw
@@ -48,11 +49,16 @@ public class HookScript : MonoBehaviour
         _currTarget = target;
     }
 
+    public void DrawInHook()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, playerScript.transform.position, hookRetrieveSpeed);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            player.hookThrown = false;
+            playerScript.SetHookThrown(false);
             gameObject.SetActive(false);
         }
     }
