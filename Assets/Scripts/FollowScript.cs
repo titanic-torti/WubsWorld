@@ -7,6 +7,6 @@ public class FollowScript : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed);
+        transform.position += new Vector3((player.position-transform.position).normalized.x, 0, 0) * moveSpeed * Time.deltaTime;
     }
 }

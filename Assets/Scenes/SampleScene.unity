@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1960211981}
-  moveSpeed: 0.02
+  moveSpeed: 0.5
 --- !u!50 &1334538289
 Rigidbody2D:
   serializedVersion: 5
@@ -884,7 +884,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!95 &1334538290
 Animator:
   serializedVersion: 7
