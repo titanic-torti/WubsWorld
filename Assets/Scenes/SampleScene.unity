@@ -1449,7 +1449,7 @@ MonoBehaviour:
   playerScript: {fileID: 1960211979}
   hookTossSpeed: 0.1
   hookRetrieveSpeed: 0.05
-  maxAnchorDist: 2
+  maxAnchorDist: 8
   closenessBounds: 0.1
 --- !u!50 &1935005934
 Rigidbody2D:
@@ -1611,7 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCheckScript: {fileID: 1919102883}
-  moveSpeed: 0.1
+  moveSpeed: 5
   jumpStr: 3
   hookScript: {fileID: 1935005933}
 --- !u!50 &1960211980
