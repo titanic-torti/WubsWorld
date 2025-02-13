@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +8,6 @@ public class PlayerScript : MonoBehaviour
     InputAction _hookThrow;
     InputAction _hookRetrieve;
 
-    // [Header("Camera Position")]
-    // [SerializeField] Camera cam;
 
     [Header("Player Movement")]
     Rigidbody2D _rb;
