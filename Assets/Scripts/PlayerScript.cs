@@ -82,7 +82,7 @@ public class PlayerScript : MonoBehaviour
     void RetrieveHook()
     {
         float hookRetrieveInput = _hookRetrieve.ReadValue<float>();
-        if (hookRetrieveInput > 0 && hookThrown)
+        if (hookRetrieveInput > 0 && hookThrown && !hookScript.BeingThrown())
         {
             hookScript.DrawInHook();
         }

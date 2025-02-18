@@ -13,6 +13,7 @@ public class HookScript : MonoBehaviour
 
     private Vector3 _currTarget;                        // the last clicked spot to target for throw
     private bool _beingThrown;                          // bool to check if the anchor is currently in process of being thrown
+    
 
     void Awake()
     {
@@ -58,6 +59,11 @@ public class HookScript : MonoBehaviour
     public bool CheckWithinMaxHookDistance()
     {
         return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
+    }
+
+    public bool BeingThrown()
+    {
+        return _beingThrown;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
