@@ -2493,8 +2493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1960211979}
-  hookTossSpeed: 0.5
-  hookRetrieveSpeed: 0.1
+  hookTossSpeed: 30
+  hookRetrieveSpeed: 5
   maxAnchorDist: 8
   closenessBounds: 0.1
 --- !u!50 &1935005934
