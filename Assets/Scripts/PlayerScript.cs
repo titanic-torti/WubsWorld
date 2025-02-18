@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     InputAction _hookThrow;
     InputAction _hookRetrieve;
 
+    PlayerHealth health;
 
     [Header("Player Movement")]
     Rigidbody2D _rb;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
         _hookRetrieve = InputSystem.actions.FindAction("HookRetrieve");
         
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        health = gameObject.GetComponent<PlayerHealth>();
 
         hookThrown = false;
     }
@@ -89,5 +91,13 @@ public class PlayerScript : MonoBehaviour
     public void SetHookThrown(bool isHookThrown)
     {
         hookThrown = isHookThrown;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health.TakeDamage(1);
+        }
     }
 }

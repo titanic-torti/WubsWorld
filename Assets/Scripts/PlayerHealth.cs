@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Heal(int amount)
+    public void Heal(int amount)
     {
         currHealth += amount;
 
@@ -65,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void FullHeal()
+    public void FullHeal()
     {
         currHealth = maxHealth;
     }
