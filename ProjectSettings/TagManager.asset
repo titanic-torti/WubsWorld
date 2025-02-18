@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Floor
+  - Anchor
   layers:
   - Default
   - TransparentFX
