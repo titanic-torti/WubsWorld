@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpCheckScript: {fileID: 9136174890123900423}
-  moveStr: 0
+  moveStr: 10
   jumpStr: 3
   hookScript: {fileID: 0}
 --- !u!50 &8946459220277676328
