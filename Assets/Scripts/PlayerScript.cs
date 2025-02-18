@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Hook Reference")]
     [SerializeField] HookScript hookScript;
+    private LineRenderer _chainLink;
     private bool hookThrown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,8 +31,23 @@ public class PlayerScript : MonoBehaviour
         
         _rb = gameObject.GetComponent<Rigidbody2D>();
         health = gameObject.GetComponent<PlayerHealth>();
+        _chainLink = gameObject.GetComponent<LineRenderer>();
+        _chainLink.enabled = false;
 
         hookThrown = false;
+    }
+
+    void Update()
+    {
+        if (hookThrown)
+        {
+            _chainLink.enabled = true;
+        }
+        else
+        {
+            _chainLink.enabled = false;
+        }
+        _chainLink.SetPositions(new Vector3[] {gameObject.transform.position, hookScript.transform.position});
     }
 
     void FixedUpdate()
