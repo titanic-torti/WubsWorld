@@ -34,7 +34,7 @@ public class HookScript : MonoBehaviour
         }
         else if (_beingThrown)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _currTarget, hookTossSpeed);
+            transform.position = Vector2.MoveTowards(transform.position, _currTarget, hookTossSpeed * Time.deltaTime);
         }
     }
 
@@ -52,7 +52,7 @@ public class HookScript : MonoBehaviour
 
     public void DrawInHook()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerScript.transform.position, hookRetrieveSpeed);
+        transform.position = Vector2.MoveTowards(transform.position, playerScript.transform.position, hookRetrieveSpeed * Time.deltaTime);
     }
 
     public bool CheckWithinMaxHookDistance()
