@@ -8,7 +8,7 @@ TagManager:
   - Anchor
   - Enemy
   - Health
-  - AnchorPoint
+  - Anchor Point
   layers:
   - Default
   - TransparentFX

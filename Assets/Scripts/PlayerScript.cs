@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Player Movement")]
     Rigidbody2D _rb;
     [SerializeField] JumpCheck jumpCheckScript;
-    [SerializeField] float moveSpeed;
+    [SerializeField] float moveStr;
     [SerializeField] float jumpStr;
 
     [Header("Hook Reference")]
@@ -34,13 +34,9 @@ public class PlayerScript : MonoBehaviour
         hookThrown = false;
     }
 
-    void Update()
-    {
-        MovePlayer();   
-    }
-
     void FixedUpdate()
     {
+        MovePlayer(); 
         JumpPlayer();
         ThrowHook();
         RetrieveHook();
@@ -51,7 +47,7 @@ public class PlayerScript : MonoBehaviour
         float moveInput = _moveAction.ReadValue<float>();
         if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0)
         {
-            transform.position += new Vector3(moveInput*moveSpeed*Time.deltaTime, 0, 0);
+            _rb.AddForce(new Vector3(moveInput*moveStr, 0, 0), ForceMode2D.Force);
         }
     }
 
