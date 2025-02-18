@@ -6,24 +6,36 @@ public class HookScript : MonoBehaviour
 
     [Header("Hook Properties")]
     Rigidbody2D _rb;
+    DistanceJoint2D _dj;
     [SerializeField] float hookTossSpeed;               // how fast the hook is tossed out
     [SerializeField] float hookRetrieveSpeed;           // how fast the hook is pulled back in
     [SerializeField] float maxAnchorDist;               // furthest distance anchor can be from player
     [SerializeField] float closenessBounds;             // how close hook needs to be to target click before being registered as fully thrown
+    [SerializeField] float timeRecoverFromLatch;        // time till anchor checks to latch to any new anchor points
 
     private Vector3 _currTarget;                        // the last clicked spot to target for throw
     private bool _beingThrown;                          // bool to check if the anchor is currently in process of being thrown
+    private bool _latched;                              // bool to check if anchor is latched to anchor point
+    private float _latchTimer;                          // tracks time since last latch to an anchor point
     
 
     void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        _dj = gameObject.GetComponent<DistanceJoint2D>();
+        _dj.enabled = false;
         _beingThrown = false;
+        _latched = false;
     }
 
     void Update()
     {
         BeingThrownToTarget();
+
+        if (_latchTimer > 0)
+        {
+            _latchTimer -= Time.deltaTime;
+        }
     }
 
     void BeingThrownToTarget()
@@ -66,12 +78,44 @@ public class HookScript : MonoBehaviour
         return _beingThrown;
     }
 
+    public bool IsLatched()
+    {
+        return _latched;
+    }
+
+    public void Latch()
+    {
+        print("latched");
+        _latched = true;
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+        _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        _dj.enabled = true;
+    }
+
+    public void UnLatch()
+    {
+        print("unlatched");
+        _latched = false;
+        _rb.bodyType = RigidbodyType2D.Dynamic;
+        _rb.constraints = RigidbodyConstraints2D.None;
+        _dj.enabled = false;
+        _latchTimer = timeRecoverFromLatch;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
             playerScript.SetHookThrown(false);
             gameObject.SetActive(false);
+        }
+    }
+
+    void OnTriggerEnter2D (Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Anchor Point") && _latchTimer <= 0)
+        {
+            Latch();
         }
     }
 }
