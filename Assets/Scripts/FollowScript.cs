@@ -9,4 +9,12 @@ public class FollowScript : MonoBehaviour
     {
         transform.position += new Vector3((player.position-transform.position).normalized.x, 0, 0) * moveSpeed * Time.deltaTime;
     }
+
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Anchor"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
