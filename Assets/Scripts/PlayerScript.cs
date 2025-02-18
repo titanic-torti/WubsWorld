@@ -99,5 +99,9 @@ public class PlayerScript : MonoBehaviour
         {
             health.TakeDamage(1);
         }
+        else if (collision.gameObject.CompareTag("Health"))
+        {
+            health.Heal(1);
+        }
     }
 }
