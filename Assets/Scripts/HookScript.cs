@@ -4,6 +4,10 @@ public class HookScript : MonoBehaviour
 {
     [SerializeField] PlayerScript playerScript;         // reference to player script properties
 
+    [Header("SFX")]
+    [SerializeField] AudioSource soundAnchorHit;    
+    [SerializeField] AudioSource soundAnchorMiss;
+
     [Header("Hook Properties")]
     Rigidbody2D _rb;
     DistanceJoint2D _dj;
@@ -44,6 +48,7 @@ public class HookScript : MonoBehaviour
         {
             _beingThrown = false;
             _rb.simulated = true;
+            soundAnchorMiss.Play();
         }
         else if (_beingThrown)
         {
@@ -116,6 +121,7 @@ public class HookScript : MonoBehaviour
         if (collider.gameObject.CompareTag("Anchor Point") && _latchTimer <= 0)
         {
             Latch();
+            soundAnchorHit.Play();
         }
     }
 }

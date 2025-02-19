@@ -10,6 +10,12 @@ public class PlayerScript : MonoBehaviour
 
     PlayerHealth health;
 
+    [Header("SFX")]
+    [SerializeField] AudioSource soundAnchorDrag;   
+    [SerializeField] AudioSource soundAnchorThrow;  
+    [SerializeField] AudioSource hurt;              
+    [SerializeField] AudioSource step;              
+
     [Header("Player Movement")]
     Rigidbody2D _rb;
     [SerializeField] JumpCheck jumpCheckScript;
@@ -61,9 +67,10 @@ public class PlayerScript : MonoBehaviour
     void MovePlayer()
     {
         float moveInput = _moveAction.ReadValue<float>();
-        if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0)
+        if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0 && moveInput != 0)
         {
             _rb.AddForce(new Vector3(moveInput*moveStr, 0, 0), ForceMode2D.Force);
+            step.Play();
         }
     }
 
@@ -88,6 +95,7 @@ public class PlayerScript : MonoBehaviour
             hookScript.Target(mousePos);
 
             hookThrown = true;
+            soundAnchorThrow.Play();
         }
     }
 
@@ -97,10 +105,15 @@ public class PlayerScript : MonoBehaviour
         if (hookRetrieveInput > 0 && hookThrown && !hookScript.BeingThrown() && !hookScript.IsLatched())
         {
             hookScript.DrawInHook();
+            soundAnchorDrag.Play();
         }
         else if (hookRetrieveInput > 0 && hookThrown && !hookScript.BeingThrown() && hookScript.IsLatched())
         {
             hookScript.UnLatch();
+        }
+        else if (hookRetrieveInput < 0)
+        {
+            soundAnchorDrag.Stop();
         }
     }
 
@@ -114,6 +127,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             health.TakeDamage(1);
+            hurt.Play();
         }
         else if (collision.gameObject.CompareTag("Health"))
         {
