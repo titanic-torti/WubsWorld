@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
 
     PlayerHealth health;
 
+    [Header("Animation")]
+    Animator anim;
+
     [Header("SFX")]
     [SerializeField] AudioSource soundAnchorDrag;   
     [SerializeField] AudioSource soundAnchorThrow;  
@@ -30,6 +33,8 @@ public class PlayerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
+
         _moveAction = InputSystem.actions.FindAction("XMove");
         _jumpAction = InputSystem.actions.FindAction("Jump");
         _hookThrow = InputSystem.actions.FindAction("HookThrow");
@@ -45,6 +50,12 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        UpdateChain();
+        UpdateAnimationGrounded();
+    }
+
+    void UpdateChain()
+    {
         if (hookThrown)
         {
             _chainLink.enabled = true;
@@ -54,6 +65,18 @@ public class PlayerScript : MonoBehaviour
             _chainLink.enabled = false;
         }
         _chainLink.SetPositions(new Vector3[] {gameObject.transform.position, hookScript.transform.position});
+    }
+
+    void UpdateAnimationGrounded()
+    {
+        if (jumpCheckScript.IsGrounded())
+        {
+            anim.SetBool("grounded", true);
+        }
+        else
+        {
+            anim.SetBool("grounded", false);
+        }
     }
 
     void FixedUpdate()
@@ -67,10 +90,15 @@ public class PlayerScript : MonoBehaviour
     void MovePlayer()
     {
         float moveInput = _moveAction.ReadValue<float>();
+        anim.SetFloat("movement", Mathf.Abs(moveInput));
         if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0 && moveInput != 0)
         {
             _rb.AddForce(new Vector3(moveInput*moveStr, 0, 0), ForceMode2D.Force);
             step.Play();
+        }
+        else
+        {
+            step.Stop();
         }
     }
 
@@ -79,6 +107,7 @@ public class PlayerScript : MonoBehaviour
         float jumpInput = _jumpAction.ReadValue<float>();
         if (jumpInput > 0 && jumpCheckScript.IsGrounded())
         {
+            anim.SetTrigger("jump");
             _rb.AddForce(Vector2.up * jumpStr, ForceMode2D.Impulse);
         }
     }
@@ -95,6 +124,7 @@ public class PlayerScript : MonoBehaviour
             hookScript.Target(mousePos);
 
             hookThrown = true;
+            anim.SetTrigger("throw");
             soundAnchorThrow.Play();
         }
     }
