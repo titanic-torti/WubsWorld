@@ -18,7 +18,7 @@ public class FollowScript : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3((player.position-transform.position).normalized.x, 0, 0) * moveSpeed * Time.deltaTime;
+        transform.position += moveSpeed * Time.deltaTime * new Vector3((player.position-transform.position).normalized.x, 0, 0);
 
         if (_crabStepTimer <= 0)
         {
