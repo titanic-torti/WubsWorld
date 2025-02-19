@@ -29,6 +29,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] HookScript hookScript;
     private LineRenderer _chainLink;
     private bool hookThrown;
+    private float _hookThrownRecentlyTimer;
+    [SerializeField] float hookRetrievedRecentlyAddTime;
+    [SerializeField] float preventDoubleClickHookThrow;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,12 +50,14 @@ public class PlayerScript : MonoBehaviour
         _chainLink.enabled = false;
 
         hookThrown = false;
+        _hookThrownRecentlyTimer = 0;
     }
 
     void Update()
     {
         UpdateChain();
         UpdateAnimationGrounded();
+        UpdateTimers();
     }
 
     void UpdateChain()
@@ -77,6 +82,14 @@ public class PlayerScript : MonoBehaviour
         else
         {
             anim.SetBool("grounded", false);
+        }
+    }
+
+    void UpdateTimers()
+    {
+        if (_hookThrownRecentlyTimer > 0)
+        {
+            _hookThrownRecentlyTimer -= Time.deltaTime;
         }
     }
 
@@ -121,7 +134,7 @@ public class PlayerScript : MonoBehaviour
     void ThrowHook()
     {
         float hookThrowInput = _hookThrow.ReadValue<float>();
-        if (hookThrowInput > 0 && !hookThrown)
+        if (hookThrowInput > 0 && !hookThrown && _hookThrownRecentlyTimer <= 0)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             
@@ -132,6 +145,15 @@ public class PlayerScript : MonoBehaviour
             hookThrown = true;
             anim.SetTrigger("throw");
             soundAnchorThrow.Play();
+            _hookThrownRecentlyTimer = preventDoubleClickHookThrow;
+        }
+
+        else if (hookThrowInput > 0 && _hookThrownRecentlyTimer <= 0)
+        {
+            hookScript.transform.gameObject.SetActive(false);
+            hookScript.transform.position = transform.position;
+            hookThrown = false;
+            _hookThrownRecentlyTimer = hookRetrievedRecentlyAddTime + preventDoubleClickHookThrow;
         }
     }
 

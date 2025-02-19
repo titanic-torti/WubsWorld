@@ -861,6 +861,18 @@ PrefabInstance:
       propertyPath: soundAnchorThrow
       value: 
       objectReference: {fileID: 1798368214}
+    - target: {fileID: 7267074217728118226, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: preventDoubleClickHookThrow
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267074217728118226, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: hookRetrievedRecentlyAddTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267074217728118226, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: hookThrownRecentlyMaxCooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7328650699221035725, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1264,11 +1276,12 @@ PolygonCollider2D:
       - {x: -35.29863, y: -27.78794}
       - {x: 33.826912, y: -27.684772}
       - {x: 33.78296, y: -33.83789}
-      - {x: 45.758057, y: -33.83789}
-      - {x: 45.758057, y: 56.25}
-      - {x: -45.758057, y: 56.25}
-      - {x: -45.758057, y: -56.25}
-      - {x: 45.758057, y: -56.25}
+      - {x: 96.98136, y: -34.09924}
+      - {x: 100.53542, y: 99.408}
+      - {x: -104.54592, y: 101.14255}
+      - {x: -103.85535, y: -100.23797}
+      - {x: 96.38569, y: -98.578064}
+      - {x: 96.4098, y: -38.97732}
       - {x: 45.758057, y: -38.17749}
       - {x: 12.744141, y: -38.17749}
     - - {x: -30.871582, y: -32.13501}
