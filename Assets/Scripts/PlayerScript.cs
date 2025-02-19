@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
 
     PlayerHealth health;
 
-    [Header("Animation")]
+    SpriteRenderer sprite;
     Animator anim;
 
     [Header("SFX")]
@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sprite = gameObject.GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
 
         _moveAction = InputSystem.actions.FindAction("XMove");
@@ -93,6 +94,11 @@ public class PlayerScript : MonoBehaviour
         anim.SetFloat("movement", Mathf.Abs(moveInput));
         if (!hookThrown || hookScript.CheckWithinMaxHookDistance() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0 && moveInput != 0)
         {
+            // flip sprite if facing wrong direction of movement
+            if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
+            {
+                sprite.flipX = !sprite.flipX;
+            }
             _rb.AddForce(new Vector3(moveInput*moveStr, 0, 0), ForceMode2D.Force);
             step.Play();
         }
