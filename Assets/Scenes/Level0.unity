@@ -782,6 +782,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 937809334494408223, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: fullHeart
+      value: 
+      objectReference: {fileID: 1564688358316481467, guid: a85842c21f505204898344d5e2f31749, type: 3}
+    - target: {fileID: 937809334494408223, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: emptyHeart
+      value: 
+      objectReference: {fileID: 5726080727020278575, guid: a85842c21f505204898344d5e2f31749, type: 3}
+    - target: {fileID: 937809334494408223, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
       propertyPath: 'hearts.Array.data[0]'
       value: 
       objectReference: {fileID: 1716295357}
@@ -841,6 +849,10 @@ PrefabInstance:
       propertyPath: step
       value: 
       objectReference: {fileID: 1798368212}
+    - target: {fileID: 7267074217728118226, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
+      propertyPath: jumpStr
+      value: 3.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7267074217728118226, guid: c2bc802a70b3a9a49a4a5a5060696856, type: 3}
       propertyPath: hookScript
       value: 
