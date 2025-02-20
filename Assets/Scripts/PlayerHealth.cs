@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -51,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currHealth <= 0)
         {
-            // die
+            SceneManager.LoadSceneAsync(4);
         }
     }
 

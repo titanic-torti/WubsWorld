@@ -15,7 +15,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] SpriteRenderer finSprite;
     [SerializeField] Vector3 finOffset;
     [SerializeField] SpriteRenderer anchorSprite;
-    private bool _orientationAnchor;
     SpriteRenderer sprite;
     Animator anim;
 
@@ -44,7 +43,6 @@ public class PlayerScript : MonoBehaviour
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
-        _orientationAnchor = false;
 
         _moveAction = InputSystem.actions.FindAction("XMove");
         _jumpAction = InputSystem.actions.FindAction("Jump");
