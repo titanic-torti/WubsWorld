@@ -57,7 +57,7 @@ MonoBehaviour:
   hookRetrieveSpeed: 20
   maxAnchorDist: 8
   closenessBounds: 0.1
-  timeRecoverFromLatch: 2
+  timeRecoverFromLatch: 0.2
 --- !u!212 &6356056693396354557
 SpriteRenderer:
   m_ObjectHideFlags: 0

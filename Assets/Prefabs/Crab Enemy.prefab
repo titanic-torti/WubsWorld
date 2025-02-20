@@ -158,8 +158,8 @@ MonoBehaviour:
   soundCrabStep: {fileID: 1117324240161842977}
   crabStepTimerSet: 2
   player: {fileID: 0}
-  moveSpeed: 0.7
   detectionRadius: 24
+  moveSpeed: 2.7
 --- !u!61 &7617574621432112844
 BoxCollider2D:
   m_ObjectHideFlags: 0

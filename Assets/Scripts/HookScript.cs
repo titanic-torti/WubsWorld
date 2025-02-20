@@ -126,6 +126,7 @@ public class HookScript : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Anchor Point") && _latchTimer <= 0)
         {
+            transform.position = collider.transform.position;
             Latch();
             soundAnchorHit.Play();
         }
