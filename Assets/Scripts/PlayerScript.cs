@@ -163,14 +163,18 @@ public class PlayerScript : MonoBehaviour
         if (hookRetrieveInput > 0 && hookThrown && !hookScript.BeingThrown() && !hookScript.IsLatched())
         {
             hookScript.DrawInHook();
-            soundAnchorDrag.Play();
+            if (!soundAnchorDrag.isPlaying)
+            {
+                soundAnchorDrag.Play();
+            }
         }
         else if (hookRetrieveInput > 0 && hookThrown && !hookScript.BeingThrown() && hookScript.IsLatched())
         {
             hookScript.UnLatch();
         }
-        else if (hookRetrieveInput < 0)
+        else if (hookRetrieveInput <= 0 && hookThrown && !hookScript.BeingThrown())
         {
+            hookScript.StopDrawInHook();
             soundAnchorDrag.Stop();
         }
     }

@@ -70,7 +70,13 @@ public class HookScript : MonoBehaviour
 
     public void DrawInHook()
     {
+        _rb.simulated = false;
         transform.position = Vector2.MoveTowards(transform.position, playerScript.transform.position, hookRetrieveSpeed * Time.deltaTime);
+    }
+
+    public void StopDrawInHook()
+    {
+        _rb.simulated = true;
     }
 
     public bool CheckWithinMaxHookDistance()
