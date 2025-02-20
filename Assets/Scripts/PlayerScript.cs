@@ -10,6 +10,12 @@ public class PlayerScript : MonoBehaviour
 
     PlayerHealth health;
 
+    [Header("Fin Animation")]
+    [SerializeField] Animator finAnim;
+    [SerializeField] SpriteRenderer finSprite;
+    [SerializeField] Vector3 finOffset;
+    [SerializeField] SpriteRenderer anchorSprite;
+    private bool _orientationAnchor;
     SpriteRenderer sprite;
     Animator anim;
 
@@ -38,6 +44,7 @@ public class PlayerScript : MonoBehaviour
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();
         anim = gameObject.GetComponent<Animator>();
+        _orientationAnchor = false;
 
         _moveAction = InputSystem.actions.FindAction("XMove");
         _jumpAction = InputSystem.actions.FindAction("Jump");
@@ -55,9 +62,24 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        UpdateAnchor();
         UpdateChain();
         UpdateAnimationGrounded();
         UpdateTimers();
+    }
+
+    void UpdateAnchor()
+    {
+        anchorSprite.flipY = sprite.flipX;
+        anchorSprite.flipX = sprite.flipX;
+        if (hookThrown)
+        {
+            anchorSprite.enabled = false;
+        }
+        else
+        {
+            anchorSprite.enabled = true;
+        }
     }
 
     void UpdateChain()
@@ -111,6 +133,17 @@ public class PlayerScript : MonoBehaviour
             if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
             {
                 sprite.flipX = !sprite.flipX;
+                finSprite.flipX = !finSprite.flipX;
+                if (finSprite.flipX)
+                {
+                    finSprite.transform.position += finOffset;
+                    anchorSprite.transform.position += finOffset;
+                }
+                else
+                {
+                    finSprite.transform.position -= finOffset;
+                    anchorSprite.transform.position -= finOffset;
+                }
             }
             _rb.AddForce(new Vector3(moveInput*moveStr - _rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
             if (step.isPlaying)
@@ -147,6 +180,7 @@ public class PlayerScript : MonoBehaviour
 
             hookThrown = true;
             anim.SetTrigger("throw");
+            finAnim.SetTrigger("throw");
             soundAnchorThrow.Play();
             _hookThrownRecentlyTimer = preventDoubleClickHookThrow;
         }
