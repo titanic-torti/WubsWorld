@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class LionfishScript : MonoBehaviour
 {
+    [Header("Player Feedback")]
     [SerializeField] Transform player;              // position of player
+    [SerializeField] float detectionRadius;         // distance for lion fish to start following player
+
+    [Header("Lionfish Behavior")]
+    [SerializeField] JumpCheck jumpCheckScript;     // check if lionfish on ground
     [SerializeField] float distJumpStr;             // move speed of enemy
     [SerializeField] float heightJumpStr;           // how powerfully lionfish jumps into air
-    [SerializeField] JumpCheck jumpCheckScript;     // check if lionfish on ground
     [SerializeField] float timeTillPounce;          // the wait time inbetween each pounce
 
     private float _pounceTimer;
@@ -21,7 +25,8 @@ public class LionfishScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (jumpCheckScript.IsGrounded())
+        float distanceFromPlayer = (player.position-transform.position).magnitude;
+        if (jumpCheckScript.IsGrounded() && distanceFromPlayer <= detectionRadius)
         {
             _pounceTimer -= Time.deltaTime;
             if (_pounceTimer <= 0)

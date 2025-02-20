@@ -1458,6 +1458,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &752379296
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.475273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -34.831387
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766497107035603976, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862937693718838036, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: m_Name
+      value: Lionfish Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222723132848570433, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 629228971}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4de825f64c0c4f4a80d34c7ccbd70a0, type: 3}
 --- !u!1001 &786812738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1740,7 +1801,7 @@ PolygonCollider2D:
       - {x: -15.774947, y: -3.7047076}
       - {x: -20.277246, y: -3.7428226}
       - {x: -20.237608, y: -5.1949496}
-      - {x: -30.650324, y: -8.307743}
+      - {x: -30.650324, y: -5.214858}
       - {x: -39.660645, y: -5.163574}
       - {x: -39.660645, y: 27.685547}
       - {x: 9.840566, y: 27.76559}
@@ -3520,3 +3581,4 @@ SceneRoots:
   - {fileID: 32860315}
   - {fileID: 2823497}
   - {fileID: 178882424}
+  - {fileID: 752379296}

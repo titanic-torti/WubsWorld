@@ -8,7 +8,11 @@ public class FollowScript : MonoBehaviour
     [SerializeField] float crabStepTimerSet;
     private float _crabStepTimer;
 
+    [Header("Player Feedback")]
     [SerializeField] Transform player;      // position of player
+    [SerializeField] float detectionRadius; // distance for crab to start following player
+
+    [Header("Crab Behavior")]
     [SerializeField] float moveSpeed;       // move speed of enemy
 
     void Start()
@@ -18,9 +22,13 @@ public class FollowScript : MonoBehaviour
 
     void Update()
     {
-        transform.position += moveSpeed * Time.deltaTime * new Vector3((player.position-transform.position).normalized.x, 0, 0);
+        float distanceFromPlayer = (player.position-transform.position).magnitude;
+        if (distanceFromPlayer <= detectionRadius)
+        {
+            transform.position += moveSpeed * Time.deltaTime * new Vector3((player.position-transform.position).normalized.x, 0, 0);
+        }
 
-        if (_crabStepTimer <= 0)
+        if (_crabStepTimer <= 0 && !soundCrabStep.isPlaying)
         {
             soundCrabStep.Play();
             _crabStepTimer = crabStepTimerSet;

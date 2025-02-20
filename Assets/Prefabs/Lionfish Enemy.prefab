@@ -236,9 +236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  detectionRadius: 25
+  jumpCheckScript: {fileID: 5141864417533983188}
   distJumpStr: 6
   heightJumpStr: 10
-  jumpCheckScript: {fileID: 5141864417533983188}
   timeTillPounce: 4
 --- !u!1 &2892967715784121926
 GameObject:
