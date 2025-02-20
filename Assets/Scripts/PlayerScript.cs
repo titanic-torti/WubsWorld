@@ -113,7 +113,10 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = !sprite.flipX;
             }
             _rb.AddForce(new Vector3(moveInput*moveStr - _rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
-            step.Play();
+            if (step.isPlaying)
+            {
+                step.Play();
+            }
         }
         else
         {

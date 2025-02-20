@@ -7,6 +7,7 @@ public class HookScript : MonoBehaviour
     [Header("SFX")]
     [SerializeField] AudioSource soundAnchorHit;    
     [SerializeField] AudioSource soundAnchorMiss;
+    [SerializeField] AudioSource soundEnemyHurt;
 
     [Header("Hook Properties")]
     Rigidbody2D _rb;
@@ -119,6 +120,12 @@ public class HookScript : MonoBehaviour
         {
             playerScript.SetHookThrown(false);
             gameObject.SetActive(false);
+        }
+
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            print("play enemy hurt audio");
+            soundEnemyHurt.Play();
         }
     }
 

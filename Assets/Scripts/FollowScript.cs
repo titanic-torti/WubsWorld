@@ -3,7 +3,6 @@ using UnityEngine;
 public class FollowScript : MonoBehaviour
 {
     [Header("SFX")]
-    [SerializeField] AudioSource soundCrabHurt;
     [SerializeField] AudioSource soundCrabStep;
     [SerializeField] float crabStepTimerSet;
     private float _crabStepTimer;
@@ -43,7 +42,6 @@ public class FollowScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Anchor"))
         {
-            soundCrabHurt.Play();
             Destroy(gameObject);
         }
     }
