@@ -1,0 +1,2 @@
+# WubsWorld
+ Wub is generated in a factory by the mad scientist who thought it would be a brilliant idea to give a shark legs. Wub is mortified by his very existence, and that there is someone living who would think of making him. He carries an anchor with an attached chain. As Wub continues on his quest, he meets the love of his life, well, she doesn't know that yet. The elusive well-rendered shark that can fly. Wub pursues the mad scientist in the hopes that he can be given wings.
