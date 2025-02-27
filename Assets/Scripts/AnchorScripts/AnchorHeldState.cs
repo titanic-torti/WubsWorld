@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AnchorIdleState : AnchorBaseState
+public class AnchorHeldState : AnchorBaseState
 {
     public override void EnterState(AnchorStateManager anchor)
     {

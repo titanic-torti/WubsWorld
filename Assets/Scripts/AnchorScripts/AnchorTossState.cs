@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class TossState : MonoBehaviour
+public class AnchorTossState : AnchorBaseState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void EnterState(AnchorStateManager anchor)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UpdateState(AnchorStateManager anchor)
     {
-        
+
+    }
+
+    public override void FixedUpdateState(AnchorStateManager anchor)
+    {
+
+    }
+
+    public override void OnCollisionEnter2D(AnchorStateManager anchor, Collision2D collision)
+    {
+
     }
 }

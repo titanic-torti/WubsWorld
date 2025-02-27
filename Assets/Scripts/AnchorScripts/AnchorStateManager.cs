@@ -1,16 +1,31 @@
 using UnityEngine;
 
-public class HookStateManager : MonoBehaviour
+public class AnchorStateManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    AnchorBaseState currState;
+    AnchorHeldState HeldState = new AnchorHeldState();
+    AnchorIdleState IdleState = new AnchorIdleState();
+    AnchorTossState TossState = new AnchorTossState();
+    AnchorRetrieveState RetrieveState = new AnchorRetrieveState();
+
     void Start()
     {
-        
+        currState = HeldState;
+        currState.EnterState(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        currState.UpdateState(this);
+    }
+
+    void FixedUpdate()
+    {
+        currState.FixedUpdateState(this);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        currState.OnCollisionEnter2D(this, collision);
     }
 }

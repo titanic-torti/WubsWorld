@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HookScript : MonoBehaviour
+public class AnchorScript : MonoBehaviour
 {
     [SerializeField] PlayerScript playerScript;         // reference to player script properties
 
