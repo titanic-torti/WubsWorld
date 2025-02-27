@@ -1,19 +1,29 @@
 using UnityEngine;
 
-public class AnchorRetrieveState : AnchorBaseState
+public class AnchorLatchedState : AnchorBaseState
 {
     public override void EnterState(AnchorStateManager anchor)
     {
-        anchor._rb.simulated = false;
+        anchor._rb.simulated = true;
+        anchor._rb.bodyType = RigidbodyType2D.Kinematic;
+        anchor._rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        anchor._dj.enabled = true;
+    }
+
+    void RevertEnterStateChanges(AnchorStateManager anchor)
+    {
+        anchor._rb.bodyType = RigidbodyType2D.Dynamic;
+        anchor._rb.constraints = RigidbodyConstraints2D.None;
+        anchor._dj.enabled = false;
     }
 
     public override void UpdateState(AnchorStateManager anchor)
     {
-        anchor.transform.position = Vector2.MoveTowards(anchor.transform.position, anchor.playerScript.transform.position, anchor.hookRetrieveSpeed * Time.deltaTime);
-        
         float retrieveInput = anchor._hookRetrieve.ReadValue<float>();
         if (retrieveInput <= 0)
         {
+            RevertEnterStateChanges(anchor);
+            anchor._latchTimer = anchor.timeRecoverFromLatch;
             anchor.SwitchState(anchor.IdleState);
         }
     }
