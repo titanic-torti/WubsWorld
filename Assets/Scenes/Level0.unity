@@ -278,10 +278,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1454946965577658360, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
+    - target: {fileID: 4383908966898014550, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1798368210}
+    - target: {fileID: 0}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4678849184698900889, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
       propertyPath: m_Name
       value: Hook
@@ -289,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 5431678334244794642, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297460923841631028, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
+      propertyPath: m_Distance
+      value: 2.468116
       objectReference: {fileID: 0}
     - target: {fileID: 7297460923841631028, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
       propertyPath: m_ConnectedRigidBody
@@ -301,13 +309,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
 --- !u!114 &29211998 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1454946965577658360, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4383908966898014550, guid: 258c35092bbe732468601cbd187d28c5, type: 3}
   m_PrefabInstance: {fileID: 29211997}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20491fc9897e01c4bb0051cb75e1b05e, type: 3}
+  m_Script: {fileID: 11500000, guid: b430660af306c6e4bb21ebd3bd28802f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &32860314
