@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnchorTossState : AnchorBaseState
 {
     public override void EnterState(AnchorStateManager anchor)
     {
+        anchor._currTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         anchor._rb.simulated = false;
+        anchor.PlayAudio(anchor.soundAnchorThrow);
     }
 
     public override void UpdateState(AnchorStateManager anchor)

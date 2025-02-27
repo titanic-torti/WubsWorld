@@ -5,6 +5,7 @@ public class AnchorRetrieveState : AnchorBaseState
     public override void EnterState(AnchorStateManager anchor)
     {
         anchor._rb.simulated = false;
+        anchor.PlayAudio(anchor.soundAnchorDrag);
     }
 
     public override void UpdateState(AnchorStateManager anchor)
@@ -14,6 +15,7 @@ public class AnchorRetrieveState : AnchorBaseState
         float retrieveInput = anchor._hookRetrieve.ReadValue<float>();
         if (retrieveInput <= 0)
         {
+            anchor.soundAnchorDrag.Stop();
             anchor.SwitchState(anchor.IdleState);
         }
     }

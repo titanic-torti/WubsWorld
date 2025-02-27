@@ -25,6 +25,8 @@ public class AnchorStateManager : MonoBehaviour
     public AudioSource soundAnchorHit;    
     public AudioSource soundAnchorMiss;
     public AudioSource soundEnemyHurt;
+    public AudioSource soundAnchorDrag;
+    public AudioSource soundAnchorThrow;
 
     // ---------------------
     // ANCHOR PROPERTIES
