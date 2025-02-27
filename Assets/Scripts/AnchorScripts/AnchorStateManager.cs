@@ -70,6 +70,7 @@ public class AnchorStateManager : MonoBehaviour
 
     void Update()
     {
+        // print("I am currently in the " + currState);
         UpdateTimers();
         currState.UpdateState(this);
     }
