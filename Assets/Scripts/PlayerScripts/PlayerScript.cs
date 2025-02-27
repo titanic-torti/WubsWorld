@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float jumpStr;
 
     [Header("Hook Reference")]
-    [SerializeField] HookScript hookScript;
+    [SerializeField] AnchorScript hookScript;
     private LineRenderer _chainLink;
     private bool hookThrown;
     private float _hookThrownRecentlyTimer;
