@@ -6,6 +6,7 @@ public class AnchorHeldState : AnchorBaseState
     {
         anchor._sr.enabled = false;
         anchor._rb.simulated = false;
+        anchor.playerScript.hookThrown = false;
     }
 
     public override void UpdateState(AnchorStateManager anchor)
@@ -15,6 +16,7 @@ public class AnchorHeldState : AnchorBaseState
         if (throwInput > 0)
         {
             anchor._sr.enabled = true;
+            anchor.playerScript.hookThrown = true;
             anchor.SwitchState(anchor.TossState);
         }
     }

@@ -13,7 +13,7 @@ public class AnchorTossState : AnchorBaseState
     public override void UpdateState(AnchorStateManager anchor)
     {
         anchor.transform.position = Vector2.MoveTowards(anchor.transform.position, anchor._currTarget, anchor.hookTossSpeed * Time.deltaTime);
-        if (WithinThrow(anchor, anchor._currTarget) || !CheckWithinMaxAnchorDist(anchor))
+        if (WithinThrow(anchor, anchor._currTarget) || !anchor.CheckWithinMaxAnchorDist())
         {
             anchor.PlayAudio(anchor.soundAnchorMiss);
             anchor.SwitchState(anchor.IdleState);
@@ -24,11 +24,6 @@ public class AnchorTossState : AnchorBaseState
     bool WithinThrow(AnchorStateManager anchor, Vector2 target)
     {
         return anchor.closenessBounds >= (new Vector2(anchor.transform.position.x, anchor.transform.position.y) - target).magnitude;
-    }
-
-    bool CheckWithinMaxAnchorDist(AnchorStateManager anchor)
-    {
-        return anchor.maxAnchorDist >= (anchor.playerScript.transform.position - anchor.transform.position).magnitude;
     }
 
     public override void FixedUpdateState(AnchorStateManager anchor)

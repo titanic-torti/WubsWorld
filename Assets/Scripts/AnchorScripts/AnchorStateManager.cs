@@ -87,6 +87,12 @@ public class AnchorStateManager : MonoBehaviour
         currState.FixedUpdateState(this);
     }
 
+    public bool CheckWithinMaxAnchorDist()
+    {
+        return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
+    }
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         currState.OnCollisionEnter2D(this, collision);
