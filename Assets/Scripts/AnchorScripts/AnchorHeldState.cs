@@ -6,6 +6,7 @@ public class AnchorHeldState : AnchorBaseState
     {
         anchor._sr.enabled = false;
         anchor._rb.simulated = false;
+        anchor._rb.linearVelocity = Vector3.zero;
         anchor.playerScript.hookThrown = false;
     }
 
