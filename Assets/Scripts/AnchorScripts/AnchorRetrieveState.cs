@@ -32,7 +32,6 @@ public class AnchorRetrieveState : AnchorBaseState
 
     public override void OnTriggerEnter2D(AnchorStateManager anchor, Collider2D collider)
     {
-        Debug.Log("collider with " + collider.gameObject.tag);
         if (collider.gameObject.CompareTag("Player"))
         {
             anchor.soundAnchorDrag.Stop();

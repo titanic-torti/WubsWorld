@@ -60,6 +60,8 @@ public class AnchorStateManager : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _dj = gameObject.GetComponent<DistanceJoint2D>();
         _sr = gameObject.GetComponent<SpriteRenderer>();
+
+        _latchTimer = 0;
     }
 
     void Start()
@@ -93,10 +95,14 @@ public class AnchorStateManager : MonoBehaviour
         return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
     }
 
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         currState.OnCollisionEnter2D(this, collision);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        currState.OnTriggerEnter2D(this, collider);
     }
 
     public void SwitchState(AnchorBaseState state)

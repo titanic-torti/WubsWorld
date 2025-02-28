@@ -20,7 +20,7 @@ public class AnchorLatchedState : AnchorBaseState
     public override void UpdateState(AnchorStateManager anchor)
     {
         float retrieveInput = anchor._hookRetrieve.ReadValue<float>();
-        if (retrieveInput <= 0)
+        if (retrieveInput > 0)
         {
             RevertEnterStateChanges(anchor);
             anchor._latchTimer = anchor.timeRecoverFromLatch;
