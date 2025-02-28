@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class HookScript : MonoBehaviour
+public class LegacyAnchorScript : MonoBehaviour
 {
-    [SerializeField] PlayerScript playerScript;         // reference to player script properties
+    [SerializeField] LegacyPlayerScript playerScript;         // reference to player script properties
 
     [Header("SFX")]
     [SerializeField] AudioSource soundAnchorHit;    
