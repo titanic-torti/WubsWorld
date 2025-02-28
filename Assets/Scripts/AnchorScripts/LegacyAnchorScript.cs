@@ -97,7 +97,6 @@ public class LegacyAnchorScript : MonoBehaviour
 
     public void Latch()
     {
-        print("latched");
         _latched = true;
         _rb.bodyType = RigidbodyType2D.Kinematic;
         _rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
@@ -106,7 +105,6 @@ public class LegacyAnchorScript : MonoBehaviour
 
     public void UnLatch()
     {
-        print("unlatched");
         _latched = false;
         _rb.bodyType = RigidbodyType2D.Dynamic;
         _rb.constraints = RigidbodyConstraints2D.None;
@@ -124,7 +122,6 @@ public class LegacyAnchorScript : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            print("play enemy hurt audio");
             soundEnemyHurt.Play();
         }
     }

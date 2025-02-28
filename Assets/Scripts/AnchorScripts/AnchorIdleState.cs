@@ -24,7 +24,6 @@ public class AnchorIdleState : AnchorBaseState
 
     public override void OnCollisionEnter2D(AnchorStateManager anchor, Collision2D collision)
     {
-        Debug.Log("collision of tag " + collision.gameObject.tag);
         if(collision.gameObject.CompareTag("Player"))
         {
             anchor.SwitchState(anchor.HeldState);
