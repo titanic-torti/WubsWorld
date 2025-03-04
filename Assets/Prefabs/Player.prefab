@@ -1207,6 +1207,7 @@ GameObject:
   - component: {fileID: 650513665493023992}
   - component: {fileID: 4622489782749909499}
   - component: {fileID: 1466793658945223114}
+  - component: {fileID: 4725203566277786377}
   m_Layer: 0
   m_Name: Wub
   m_TagString: Player
@@ -1719,6 +1720,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4725203566277786377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579030611847631915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4da3285a69c3e42a059e98d56cc55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hookScript: {fileID: 7396312140853319840}
+  jumpCheckScript: {fileID: 2610876878963714180}
+  moveStr: 10
+  jumpStr: 25
+  initialJumpStr: 2
+  maxJumpTime: 0.2
+  anchorSprite: {fileID: 6813059612067556211}
+  finAnim: {fileID: 5663040612328828801}
+  finSprite: {fileID: 6521926882836273949}
+  finOffset: {x: -0.55, y: 0, z: 0}
+  hurt: {fileID: 4622489782749909499}
+  step: {fileID: 1466793658945223114}
+  _rb: {fileID: 0}
+  sprite: {fileID: 0}
+  anim: {fileID: 0}
+  _moveAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dc549cea-ec04-4d53-a54b-d8a8dbd322cb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _jumpAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 41a8a528-16de-4f01-9ba9-86f29932bd99
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _hookThrow:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c3e9c1dd-4ca2-4e27-bbe8-a2cbf8349525
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  hookThrown: 0
 --- !u!1 &4831661919652667759
 GameObject:
   m_ObjectHideFlags: 0

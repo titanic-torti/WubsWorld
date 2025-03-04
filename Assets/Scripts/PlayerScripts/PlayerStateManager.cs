@@ -3,44 +3,46 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    [SerializeField] AnchorStateManager hookScript;         // reference to hook script properties
+    public AnchorStateManager hookScript;         // reference to hook script properties
 
     // STATES
     PlayerBaseState currState;
-    PlayerMoveState MoveState = new PlayerMoveState();
-    PlayerJumpingState JumpingState = new PlayerJumpingState();
-    PlayerFallingState FallingState = new PlayerFallingState();
+    public PlayerMoveState MoveState = new PlayerMoveState();
+    public PlayerJumpingState JumpingState = new PlayerJumpingState();
+    public PlayerFallingState FallingState = new PlayerFallingState();
 
     // PLAYER PROPERTIES
     [Header("Player Movement")]
-    [SerializeField] JumpCheck jumpCheckScript;             // reference to script that checks if player is touching ground
-    [SerializeField] float moveStr;                         // strength of player movement left and right
-    [SerializeField] float jumpStr;                         // how high the player jumps
+    public JumpCheck jumpCheckScript;                   // reference to script that checks if player is touching ground
+    public float moveStr;                               // strength of player movement left and right
+    public float jumpStr;                               // how high the player jumps
+    public float initialJumpStr;                        // strength of initial jump impulse
+    public float maxJumpTime;                           // how long player can rise while holding jump button
 
     // ANIMATIONS
     [Header("Fin Animation")]
-    [SerializeField] SpriteRenderer anchorSprite;           // reference to sprite of Wub's anchor when in held state
-    [SerializeField] Animator finAnim;                      // reference to animator of Wub's hand fin
-    [SerializeField] SpriteRenderer finSprite;              // reference to sprite of Wub's hand fin
-    [SerializeField] Vector3 finOffset;                     // when player changes direction, Wub is not perfectly aligned, need offset
+    public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
+    public Animator finAnim;                            // reference to animator of Wub's hand fin
+    public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
+    public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
 
     // SFX
     [Header("SFX")]
-    [SerializeField] AudioSource hurt;                      // plays audio when Wub gets hurt
-    [SerializeField] AudioSource step;                      // plays audio when Wub walks, loops
+    public AudioSource hurt;                            // plays audio when Wub gets hurt
+    public AudioSource step;                            // plays audio when Wub walks, loops
 
     // COMPONENT REFERENCE
-    Rigidbody2D _rb;                                        // rigidbody of Wub
-    PlayerHealth health;                                    // health of Wub (script)
-    SpriteRenderer sprite;                                  // sprite reference to Wub
-    Animator anim;                                          // main animator controller of Wub
+    [HideInInspector] public Rigidbody2D _rb;           // rigidbody of Wub
+    PlayerHealth health;                                // health of Wub (script)
+    [HideInInspector] public SpriteRenderer sprite;     // sprite reference to Wub
+    [HideInInspector] public Animator anim;             // main animator controller of Wub
 
-    InputAction _moveAction;                                // checks for move input
-    InputAction _jumpAction;                                // checks for jump input
-    InputAction _hookThrow;                                 // checks for hook throw input
+    [HideInInspector] public InputAction _moveAction;   // checks for move input
+    [HideInInspector] public InputAction _jumpAction;   // checks for jump input
+    [HideInInspector] public InputAction _hookThrow;    // checks for hook throw input
 
-    LineRenderer _chainLink;                                // reference to line that visually connects Wub and anchor
-    [HideInInspector] public bool hookThrown;               // bool to determine if hook is thrown or not
+    LineRenderer _chainLink;                            // reference to line that visually connects Wub and anchor
+    [HideInInspector] public bool hookThrown;           // bool to determine if hook is thrown or not
 
     // ----------------------------------------------------------------------------------------
     // FUNCTIONS
@@ -131,46 +133,12 @@ public class PlayerStateManager : MonoBehaviour
 
     void MovePlayer()
     {
-        float moveInput = _moveAction.ReadValue<float>();
-        anim.SetFloat("movement", Mathf.Abs(moveInput));
-        if (!hookThrown || hookScript.CheckWithinMaxAnchorDist() || (hookScript.transform.position - transform.position).normalized.x * moveInput > 0)
-        {
-            // flip sprite if facing wrong direction of movement
-            if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
-            {
-                sprite.flipX = !sprite.flipX;
-                finSprite.flipX = !finSprite.flipX;
-                if (finSprite.flipX)
-                {
-                    finSprite.transform.position += finOffset;
-                    anchorSprite.transform.position += finOffset;
-                }
-                else
-                {
-                    finSprite.transform.position -= finOffset;
-                    anchorSprite.transform.position -= finOffset;
-                }
-            }
-            _rb.AddForce(new Vector3(moveInput*moveStr - _rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
-            if (step.isPlaying)
-            {
-                step.Play();
-            }
-        }
-        else
-        {
-            step.Stop();
-        }
+        
     }
 
     void JumpPlayer()
     {
-        float jumpInput = _jumpAction.ReadValue<float>();
-        if (jumpInput > 0 && jumpCheckScript.IsGrounded())
-        {
-            anim.SetTrigger("jump");
-            _rb.AddForce(Vector2.up * jumpStr, ForceMode2D.Impulse);
-        }
+        
     }
 
     void ThrowHook()
