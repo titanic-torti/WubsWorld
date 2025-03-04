@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameTestingEnvDebug : MonoBehaviour
+public class DebugController : MonoBehaviour
 {
     void Update()
     {
