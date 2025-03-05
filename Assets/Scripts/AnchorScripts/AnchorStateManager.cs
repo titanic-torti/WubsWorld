@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class AnchorStateManager : MonoBehaviour
 {
-    public PlayerScript playerScript;         // reference to player script properties
+    public PlayerStateManager playerScript;         // reference to player script properties
 
     // ANCHOR PROPERTIES
     [Header("Anchor Properties")]
