@@ -522,12 +522,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b430660af306c6e4bb21ebd3bd28802f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScript: {fileID: 1579724826449604364}
+  playerScript: {fileID: 0}
   hookTossSpeed: 40
   hookRetrieveSpeed: 20
   maxAnchorDist: 8
   closenessBounds: 0.1
   timeRecoverFromLatch: 0.2
+  rappelSpeed: 5
   soundAnchorHit: {fileID: 9222230387169518394}
   soundAnchorMiss: {fileID: 6617685488392802795}
   soundEnemyHurt: {fileID: 1230342399297532132}
@@ -547,6 +548,24 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: a97811f8-8b9f-4925-96aa-b7f9fb666b82
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _rappelUp:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c542217f-9e8e-4951-91a5-214f36fe1927
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _rappelDown:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 17cb8cd6-d441-4ed7-848f-ab8433085939
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1738,6 +1757,7 @@ MonoBehaviour:
   jumpStr: 25
   initialJumpStr: 2
   maxJumpTime: 0.2
+  throwPreview: {fileID: 0}
   anchorSprite: {fileID: 6813059612067556211}
   finAnim: {fileID: 5663040612328828801}
   finSprite: {fileID: 6521926882836273949}

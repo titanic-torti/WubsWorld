@@ -7,7 +7,6 @@ public class AnchorLatchedState : AnchorBaseState
         anchor._rb.simulated = true;
         anchor._rb.bodyType = RigidbodyType2D.Kinematic;
         anchor._rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        //anchor._dj.enabled = true;
     }
 
     void RevertEnterStateChanges(AnchorStateManager anchor)
@@ -28,24 +27,23 @@ public class AnchorLatchedState : AnchorBaseState
             anchor.SwitchState(anchor.IdleState);
         }
 
+        // player rappling
         if (!anchor.playerScript.jumpCheckScript.IsGrounded())
         {
-            const float ADJUSTMENT_SPEED = 0.01f;
-
             // Are these keys okay? Do they feel "natural"?
-            const KeyCode EXTEND_KEY = KeyCode.S;
-            const KeyCode RETRACT_KEY = KeyCode.W;
+            // const KeyCode EXTEND_KEY = KeyCode.S;
+            // const KeyCode RETRACT_KEY = KeyCode.W;
 
-            // Extend
-            if (Input.GetKey(EXTEND_KEY) && anchor._dj.distance < anchor.maxAnchorDist)
+            // rappel down
+            if (anchor._rappelDown.ReadValue<float>() > 0 && anchor._dj.distance < anchor.maxAnchorDist)
             {
-                anchor._dj.distance += ADJUSTMENT_SPEED;
+                anchor._dj.distance += anchor.rappelSpeed * Time.deltaTime;
             }
 
-            // Retract
-            if (Input.GetKey(RETRACT_KEY) && anchor._dj.distance > 1)
+            // rappel up
+            if (anchor._rappelUp.ReadValue<float>() > 0 && anchor._dj.distance > 1)
             {
-                anchor._dj.distance -= ADJUSTMENT_SPEED;
+                anchor._dj.distance -= anchor.rappelSpeed * Time.deltaTime;
             }
         }
     }

@@ -12,6 +12,7 @@ public class AnchorStateManager : MonoBehaviour
     public float maxAnchorDist;                     // furthest distance anchor can be from player
     public float closenessBounds;                   // how close hook needs to be to target click before being registered as fully thrown
     public float timeRecoverFromLatch;              // time till anchor checks to latch to any new anchor points
+    public float rappelSpeed;                       // speed at which Wub can rappel up and down while latched
 
     // STATES
     AnchorBaseState currState;
@@ -32,6 +33,8 @@ public class AnchorStateManager : MonoBehaviour
     // COMPONENT REFERENCE
     [HideInInspector] public InputAction _hookThrow;
     [HideInInspector] public InputAction _hookRetrieve;
+    [HideInInspector] public InputAction _rappelUp;
+    [HideInInspector] public InputAction _rappelDown;
 
     [HideInInspector] public Rigidbody2D _rb;
     [HideInInspector] public DistanceJoint2D _dj;
@@ -46,6 +49,8 @@ public class AnchorStateManager : MonoBehaviour
     {
         _hookThrow = InputSystem.actions.FindAction("HookThrow");
         _hookRetrieve = InputSystem.actions.FindAction("HookRetrieve");
+        _rappelUp = InputSystem.actions.FindAction("RappelUp");
+        _rappelDown = InputSystem.actions.FindAction("RappelDown");
 
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _dj = gameObject.GetComponent<DistanceJoint2D>();
