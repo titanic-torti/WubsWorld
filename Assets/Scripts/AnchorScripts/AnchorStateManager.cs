@@ -13,6 +13,7 @@ public class AnchorStateManager : MonoBehaviour
     public float closenessBounds;                   // how close hook needs to be to target click before being registered as fully thrown
     public float timeRecoverFromLatch;              // time till anchor checks to latch to any new anchor points
     public float rappelSpeed;                       // speed at which Wub can rappel up and down while latched
+    public float unlatchMomentumBonus;              // the boost to movement right after unlatching from anchor point
 
     // STATES
     AnchorBaseState currState;

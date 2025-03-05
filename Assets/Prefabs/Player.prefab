@@ -668,6 +668,7 @@ MonoBehaviour:
   closenessBounds: 0.1
   timeRecoverFromLatch: 0.2
   rappelSpeed: 5
+  unlatchMomentumBonus: 0.1
   soundAnchorHit: {fileID: 9222230387169518394}
   soundAnchorMiss: {fileID: 6617685488392802795}
   soundEnemyHurt: {fileID: 1230342399297532132}

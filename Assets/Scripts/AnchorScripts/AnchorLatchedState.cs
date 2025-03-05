@@ -25,6 +25,7 @@ public class AnchorLatchedState : AnchorBaseState
         {
             RevertEnterStateChanges(anchor);
             anchor._latchTimer = anchor.timeRecoverFromLatch;
+            anchor.playerScript._rb.AddForce(anchor.playerScript._rb.linearVelocity * anchor.unlatchMomentumBonus, ForceMode2D.Impulse);
             anchor.SwitchState(anchor.IdleState);
         }
         else if (unlatchHookInput > 0 &&
@@ -33,6 +34,7 @@ public class AnchorLatchedState : AnchorBaseState
         {
             RevertEnterStateChanges(anchor);
             anchor._latchTimer = anchor.timeRecoverFromLatch;
+            anchor.playerScript._rb.AddForce(anchor.playerScript._rb.linearVelocity * anchor.unlatchMomentumBonus, ForceMode2D.Impulse);
             anchor._rb.AddForce(anchor.playerScript._rb.linearVelocity, ForceMode2D.Impulse);
             anchor.SwitchState(anchor.IdleState);
         }
