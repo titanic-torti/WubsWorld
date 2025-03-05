@@ -20,10 +20,20 @@ public class AnchorLatchedState : AnchorBaseState
     {
         // Detaching anchor
         float retrieveInput = anchor._hookRetrieve.ReadValue<float>();
+        float unlatchHookInput = anchor._unlatchHook.ReadValue<float>();
         if (retrieveInput > 0)
         {
             RevertEnterStateChanges(anchor);
             anchor._latchTimer = anchor.timeRecoverFromLatch;
+            anchor.SwitchState(anchor.IdleState);
+        }
+        else if (unlatchHookInput > 0 &&
+            !anchor.playerScript.jumpCheckScript.IsGrounded() &&
+            anchor.playerScript.GetState() != anchor.playerScript.JumpingState)
+        {
+            RevertEnterStateChanges(anchor);
+            anchor._latchTimer = anchor.timeRecoverFromLatch;
+            anchor._rb.AddForce(anchor.playerScript._rb.linearVelocity, ForceMode2D.Impulse);
             anchor.SwitchState(anchor.IdleState);
         }
 

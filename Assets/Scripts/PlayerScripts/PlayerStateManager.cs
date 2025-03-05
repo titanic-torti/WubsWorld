@@ -187,6 +187,11 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
+    public PlayerBaseState GetState()
+    {
+        return currState;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

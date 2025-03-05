@@ -5,7 +5,7 @@ public class AnchorIdleState : AnchorBaseState
     public override void EnterState(AnchorStateManager anchor)
     {
         anchor._rb.simulated = true;
-        anchor._rb.linearVelocity = Vector3.zero;
+        // anchor._rb.linearVelocity = Vector3.zero;
     }
 
     public override void UpdateState(AnchorStateManager anchor)

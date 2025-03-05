@@ -33,6 +33,7 @@ public class AnchorStateManager : MonoBehaviour
     // COMPONENT REFERENCE
     [HideInInspector] public InputAction _hookThrow;
     [HideInInspector] public InputAction _hookRetrieve;
+    [HideInInspector] public InputAction _unlatchHook;
     [HideInInspector] public InputAction _rappelUp;
     [HideInInspector] public InputAction _rappelDown;
 
@@ -49,6 +50,7 @@ public class AnchorStateManager : MonoBehaviour
     {
         _hookThrow = InputSystem.actions.FindAction("HookThrow");
         _hookRetrieve = InputSystem.actions.FindAction("HookRetrieve");
+        _unlatchHook = InputSystem.actions.FindAction("Jump");
         _rappelUp = InputSystem.actions.FindAction("RappelUp");
         _rappelDown = InputSystem.actions.FindAction("RappelDown");
 
