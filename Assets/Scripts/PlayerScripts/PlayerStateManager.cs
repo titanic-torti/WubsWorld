@@ -18,6 +18,7 @@ public class PlayerStateManager : MonoBehaviour
     public float jumpStr;                               // how high the player jumps
     public float initialJumpStr;                        // strength of initial jump impulse
     public float maxJumpTime;                           // how long player can rise while holding jump button
+    public LineRenderer throwPreview;                   // the line drawn showing where the anchor will land before it's thrown
 
     // ANIMATIONS
     [Header("Fin Animation")]
@@ -63,6 +64,7 @@ public class PlayerStateManager : MonoBehaviour
         
         // set start values
         _chainLink.enabled = false;
+        throwPreview.enabled = false;
         hookThrown = false;
 
         // set current state
@@ -81,6 +83,7 @@ public class PlayerStateManager : MonoBehaviour
         UpdateAnchor();
         UpdateChain();
         UpdateAnimationGrounded();
+        UpdateThrowPreview();
         currState.UpdateState(this);
     }
 
@@ -123,6 +126,28 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
+    void UpdateThrowPreview()
+    {
+        if (Mouse.current.leftButton.isPressed && !hookThrown)
+        {
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 diff = worldPos - _rb.position;
+            
+            if (diff.magnitude > hookScript.maxAnchorDist) {
+                worldPos = _rb.position + (diff.normalized * hookScript.maxAnchorDist);
+            }
+
+            throwPreview.SetPositions(new Vector3[] { _rb.position, worldPos });
+
+            throwPreview.enabled = true;
+        }
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            throwPreview.enabled = false;
+        }
+    }
+
     void FixedUpdate()
     {
         MovePlayer(); 
@@ -143,8 +168,8 @@ public class PlayerStateManager : MonoBehaviour
 
     void ThrowHook()
     {
-        float hookThrowInput = _hookThrow.ReadValue<float>();
-        if (hookThrowInput > 0 && !hookThrown)
+        // float hookThrowInput = _hookThrow.ReadValue<float>();
+        if (Mouse.current.leftButton.wasReleasedThisFrame && !hookThrown)
         {
             anim.SetTrigger("throw");
             finAnim.SetTrigger("throw");

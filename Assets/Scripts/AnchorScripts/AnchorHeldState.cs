@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnchorHeldState : AnchorBaseState
 {
@@ -13,9 +14,8 @@ public class AnchorHeldState : AnchorBaseState
     public override void UpdateState(AnchorStateManager anchor)
     {
         anchor.transform.position = anchor.playerScript.transform.position;
-        float throwInput = anchor._hookThrow.ReadValue<float>();
-        if (throwInput > 0)
-        {
+
+        if (anchor._hookThrow.WasReleasedThisFrame()) {
             anchor._sr.enabled = true;
             anchor.playerScript.hookThrown = true;
             anchor.SwitchState(anchor.TossState);
