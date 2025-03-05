@@ -26,25 +26,8 @@ public class PlayerJumpingState : PlayerBaseState
         // apply continuous jump force
         anchor._rb.AddForce(Vector2.up * anchor.jumpStr, ForceMode2D.Force);
 
-        // flip sprite if facing wrong direction of movement
-        float moveInput = anchor._moveAction.ReadValue<float>();
-        if ((moveInput > 0 && !anchor.sprite.flipX) || (moveInput < 0 && anchor.sprite.flipX))
-        {
-            anchor.sprite.flipX = !anchor.sprite.flipX;
-            anchor.finSprite.flipX = !anchor.finSprite.flipX;
-            if (anchor.finSprite.flipX)
-            {
-                anchor.finSprite.transform.position += anchor.finOffset;
-                anchor.anchorSprite.transform.position += anchor.finOffset;
-            }
-            else
-            {
-                anchor.finSprite.transform.position -= anchor.finOffset;
-                anchor.anchorSprite.transform.position -= anchor.finOffset;
-            }
-        }
-
         // apply movement force
+        float moveInput = anchor._moveAction.ReadValue<float>();
         anchor._rb.AddForce(new Vector3(moveInput*anchor.moveStr - anchor._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
     }
 

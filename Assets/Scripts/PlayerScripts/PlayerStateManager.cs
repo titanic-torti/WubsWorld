@@ -84,6 +84,7 @@ public class PlayerStateManager : MonoBehaviour
         UpdateChain();
         UpdateAnimationGrounded();
         UpdateThrowPreview();
+        FlipSprite();
         currState.UpdateState(this);
     }
 
@@ -150,20 +151,29 @@ public class PlayerStateManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        MovePlayer(); 
-        JumpPlayer();
         ThrowHook();
         currState.FixedUpdateState(this);
     }
 
-    void MovePlayer()
+    void FlipSprite()
     {
-        
-    }
-
-    void JumpPlayer()
-    {
-        
+        // flip sprite if facing wrong direction of movement
+        float moveInput = _moveAction.ReadValue<float>();
+        if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
+        {
+            sprite.flipX = !sprite.flipX;
+            finSprite.flipX = !finSprite.flipX;
+            if (finSprite.flipX)
+            {
+                finSprite.transform.position += finOffset;
+                anchorSprite.transform.position += finOffset;
+            }
+            else
+            {
+                finSprite.transform.position -= finOffset;
+                anchorSprite.transform.position -= finOffset;
+            }
+        }
     }
 
     void ThrowHook()

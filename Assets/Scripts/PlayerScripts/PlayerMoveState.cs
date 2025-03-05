@@ -29,23 +29,6 @@ public class PlayerMoveState : PlayerBaseState
         anchor.anim.SetFloat("movement", Mathf.Abs(moveInput));
         if (!anchor.hookThrown || anchor.hookScript.CheckWithinMaxAnchorDist() || (anchor.hookScript.transform.position - anchor.transform.position).normalized.x * moveInput > 0)
         {
-            // flip sprite if facing wrong direction of movement
-            if ((moveInput > 0 && !anchor.sprite.flipX) || (moveInput < 0 && anchor.sprite.flipX))
-            {
-                anchor.sprite.flipX = !anchor.sprite.flipX;
-                anchor.finSprite.flipX = !anchor.finSprite.flipX;
-                if (anchor.finSprite.flipX)
-                {
-                    anchor.finSprite.transform.position += anchor.finOffset;
-                    anchor.anchorSprite.transform.position += anchor.finOffset;
-                }
-                else
-                {
-                    anchor.finSprite.transform.position -= anchor.finOffset;
-                    anchor.anchorSprite.transform.position -= anchor.finOffset;
-                }
-            }
-
             // apply movement force
             anchor._rb.AddForce(new Vector3(moveInput*anchor.moveStr - anchor._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
 
