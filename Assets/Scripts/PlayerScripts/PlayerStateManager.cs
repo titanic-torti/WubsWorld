@@ -159,6 +159,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         // flip sprite if facing wrong direction of movement
         float moveInput = _moveAction.ReadValue<float>();
+        anim.SetFloat("movement", Mathf.Abs(moveInput));
         if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
         {
             sprite.flipX = !sprite.flipX;
