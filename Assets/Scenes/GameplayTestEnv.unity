@@ -247,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 404096065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60.5, y: 11.5, z: 10}
+  m_LocalPosition: {x: 60.5, y: 10.5, z: 10}
   m_LocalScale: {x: 1, y: 20, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -649,8 +649,8 @@ Transform:
   m_GameObject: {fileID: 570084129}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.5, y: -1.5, z: 10}
-  m_LocalScale: {x: 1, y: 6, z: 0}
+  m_LocalPosition: {x: 40.5, y: -2, z: 10}
+  m_LocalScale: {x: 1, y: 5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1320093663}
@@ -766,7 +766,7 @@ Transform:
   m_GameObject: {fileID: 644391347}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50, y: 2, z: 10}
+  m_LocalPosition: {x: 50, y: 1, z: 10}
   m_LocalScale: {x: 20, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1187,7 +1187,7 @@ MonoBehaviour:
   AnchorPoint2: {fileID: 1020048591}
   AnchorPoint3: {fileID: 2075318571}
   floorWidths: 20
-  floor2HeightOffset: 0
+  floor2HeightOffset: -1
   ceilingHeight: 20
   pitWidth: 20
   pitDepth: 7

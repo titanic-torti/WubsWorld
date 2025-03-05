@@ -104,7 +104,7 @@ public class GameplayTestEnv : MonoBehaviour
         RightPitWall.transform.localScale = new Vector2(1, pitDepth - Floor2.transform.localScale.y + floor2HeightOffset);
         RightPitWall.transform.position = new Vector2(
             Pit.transform.position.x + pitWidth/2 + RightPitWall.transform.localScale.x/2,
-            floor2HeightOffset - pitDepth/2
+            floor2HeightOffset/2 - pitDepth/2
         );
 
         // AnchorPoints
