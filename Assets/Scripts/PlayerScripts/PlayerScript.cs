@@ -3,36 +3,41 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
-    InputAction _moveAction;
-    InputAction _jumpAction;
-    InputAction _hookThrow;
+    [SerializeField] AnchorStateManager hookScript;         // reference to hook script properties
 
-    PlayerHealth health;
-
-    [Header("Fin Animation")]
-    [SerializeField] Animator finAnim;
-    [SerializeField] SpriteRenderer finSprite;
-    [SerializeField] Vector3 finOffset;
-    [SerializeField] SpriteRenderer anchorSprite;
-    SpriteRenderer sprite;
-    Animator anim;
-
-    [Header("SFX")]
-    [SerializeField] AudioSource hurt;              
-    [SerializeField] AudioSource step;              
-
+    // PLAYER PROPERTIES
     [Header("Player Movement")]
-    Rigidbody2D _rb;
-    [SerializeField] JumpCheck jumpCheckScript;
-    [SerializeField] float moveStr;
-    [SerializeField] float jumpStr;
+    [SerializeField] JumpCheck jumpCheckScript;             // reference to script that checks if player is touching ground
+    [SerializeField] float moveStr;                         // strength of player movement left and right
+    [SerializeField] float jumpStr;                         // how high the player jumps
 
-    [Header("Hook Reference")]
-    [SerializeField] AnchorStateManager hookScript;
-    private LineRenderer _chainLink;
-    [HideInInspector] public bool hookThrown;
+    // ANIMATIONS
+    [Header("Fin Animation")]
+    [SerializeField] SpriteRenderer anchorSprite;           // reference to sprite of Wub's anchor when in held state
+    [SerializeField] Animator finAnim;                      // reference to animator of Wub's hand fin
+    [SerializeField] SpriteRenderer finSprite;              // reference to sprite of Wub's hand fin
+    [SerializeField] Vector3 finOffset;                     // when player changes direction, Wub is not perfectly aligned, need offset
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // SFX
+    [Header("SFX")]
+    [SerializeField] AudioSource hurt;                      // plays audio when Wub gets hurt
+    [SerializeField] AudioSource step;                      // plays audio when Wub walks, loops
+
+    // COMPONENT REFERENCE
+    Rigidbody2D _rb;                                        // rigidbody of Wub
+    PlayerHealth health;                                    // health of Wub (script)
+    SpriteRenderer sprite;                                  // sprite reference to Wub
+    Animator anim;                                          // main animator controller of Wub
+
+    InputAction _moveAction;                                // checks for move input
+    InputAction _jumpAction;                                // checks for jump input
+    InputAction _hookThrow;                                 // checks for hook throw input
+
+    LineRenderer _chainLink;                                // reference to line that visually connects Wub and anchor
+    [HideInInspector] public bool hookThrown;               // bool to determine if hook is thrown or not
+
+    // ----------------------------------------------------------------------------------------
+    // FUNCTIONS
     void Start()
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();

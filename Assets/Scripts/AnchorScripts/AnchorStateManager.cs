@@ -3,14 +3,19 @@ using UnityEngine.InputSystem;
 
 public class AnchorStateManager : MonoBehaviour
 {
-    [HideInInspector] public InputAction _hookThrow;
-    [HideInInspector] public InputAction _hookRetrieve;
+    public PlayerStateManager playerScript;         // reference to player script properties
 
-    public PlayerScript playerScript;         // reference to player script properties
+    // ANCHOR PROPERTIES
+    [Header("Anchor Properties")]
+    public float hookTossSpeed;                     // how fast the hook is tossed out
+    public float hookRetrieveSpeed;                 // how fast the hook is pulled back in
+    public float maxAnchorDist;                     // furthest distance anchor can be from player
+    public float closenessBounds;                   // how close hook needs to be to target click before being registered as fully thrown
+    public float timeRecoverFromLatch;              // time till anchor checks to latch to any new anchor points
+    public float rappelSpeed;                       // speed at which Wub can rappel up and down while latched
+    public float unlatchMomentumBonus;              // the boost to movement right after unlatching from anchor point
 
-    // ---------------------
     // STATES
-    // ---------------------
     AnchorBaseState currState;
     public AnchorHeldState HeldState = new AnchorHeldState();
     public AnchorIdleState IdleState = new AnchorIdleState();
@@ -18,9 +23,7 @@ public class AnchorStateManager : MonoBehaviour
     public AnchorRetrieveState RetrieveState = new AnchorRetrieveState();
     public AnchorLatchedState LatchedState = new AnchorLatchedState();
 
-    // ---------------------
     // SFX
-    // ---------------------
     [Header("SFX")]
     public AudioSource soundAnchorHit;    
     public AudioSource soundAnchorMiss;
@@ -28,34 +31,29 @@ public class AnchorStateManager : MonoBehaviour
     public AudioSource soundAnchorDrag;
     public AudioSource soundAnchorThrow;
 
-    // ---------------------
-    // ANCHOR PROPERTIES
-    // ---------------------
-    [Header("Anchor Properties")]
-    public float hookTossSpeed;                     // how fast the hook is tossed out
-    public float hookRetrieveSpeed;                 // how fast the hook is pulled back in
-    public float maxAnchorDist;                     // furthest distance anchor can be from player
-    public float closenessBounds;                   // how close hook needs to be to target click before being registered as fully thrown
-    public float timeRecoverFromLatch;              // time till anchor checks to latch to any new anchor points
+    // COMPONENT REFERENCE
+    [HideInInspector] public InputAction _hookThrow;
+    [HideInInspector] public InputAction _hookRetrieve;
+    [HideInInspector] public InputAction _unlatchHook;
+    [HideInInspector] public InputAction _rappelUp;
+    [HideInInspector] public InputAction _rappelDown;
+
     [HideInInspector] public Rigidbody2D _rb;
     [HideInInspector] public DistanceJoint2D _dj;
     [HideInInspector] public SpriteRenderer _sr;
 
-    [HideInInspector] public Vector3 _currTarget;   // the last clicked spot to target for throw
-    [HideInInspector] public float _latchTimer;     // tracks time since last latch to an anchor point
+    [HideInInspector] public Vector3 _currTarget;           // the last clicked spot to target for throw
+    [HideInInspector] public float _latchTimer;             // tracks time since last latch to an anchor point
 
-    public void PlayAudio(AudioSource audio)
-    {
-        if (!audio.isPlaying)
-        {
-            audio.Play();
-        }
-    }
-
+    // ----------------------------------------------------------------------------------------
+    // FUNCTIONS
     void Awake()
     {
         _hookThrow = InputSystem.actions.FindAction("HookThrow");
         _hookRetrieve = InputSystem.actions.FindAction("HookRetrieve");
+        _unlatchHook = InputSystem.actions.FindAction("Jump");
+        _rappelUp = InputSystem.actions.FindAction("RappelUp");
+        _rappelDown = InputSystem.actions.FindAction("RappelDown");
 
         _rb = gameObject.GetComponent<Rigidbody2D>();
         _dj = gameObject.GetComponent<DistanceJoint2D>();
@@ -67,6 +65,12 @@ public class AnchorStateManager : MonoBehaviour
     void Start()
     {
         currState = HeldState;
+        currState.EnterState(this);
+    }
+
+    public void SwitchState(AnchorBaseState state)
+    {
+        currState = state;
         currState.EnterState(this);
     }
 
@@ -90,6 +94,14 @@ public class AnchorStateManager : MonoBehaviour
         currState.FixedUpdateState(this);
     }
 
+    public void PlayAudio(AudioSource audio)
+    {
+        if (!audio.isPlaying)
+        {
+            audio.Play();
+        }
+    }
+
     public bool CheckWithinMaxAnchorDist()
     {
         return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
@@ -103,11 +115,5 @@ public class AnchorStateManager : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         currState.OnTriggerEnter2D(this, collider);
-    }
-
-    public void SwitchState(AnchorBaseState state)
-    {
-        currState = state;
-        currState.EnterState(this);
     }
 }

@@ -6,7 +6,9 @@ public class AnchorTossState : AnchorBaseState
     public override void EnterState(AnchorStateManager anchor)
     {
         anchor._currTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        anchor._rb.simulated = false;
+        // anchor._rb.simulated = false;
+        anchor._rb.simulated = true;
+        anchor._rb.gravityScale = 0;
         anchor.PlayAudio(anchor.soundAnchorThrow);
     }
 
@@ -16,9 +18,9 @@ public class AnchorTossState : AnchorBaseState
         if (WithinThrow(anchor, anchor._currTarget) || !anchor.CheckWithinMaxAnchorDist())
         {
             anchor.PlayAudio(anchor.soundAnchorMiss);
+            anchor._rb.gravityScale = 1;
             anchor.SwitchState(anchor.IdleState);
         }
-    
     }
 
     bool WithinThrow(AnchorStateManager anchor, Vector2 target)
@@ -38,6 +40,12 @@ public class AnchorTossState : AnchorBaseState
 
     public override void OnTriggerEnter2D(AnchorStateManager anchor, Collider2D collider)
     {
-
+        if (collider.gameObject.CompareTag("Anchor Point"))
+        {
+            anchor.transform.position = collider.transform.position;
+            anchor.soundAnchorHit.Play();
+            anchor._rb.gravityScale = 1;
+            anchor.SwitchState(anchor.LatchedState);
+        }
     }
 }
