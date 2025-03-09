@@ -5,7 +5,8 @@ public class AnchorTossState : AnchorBaseState
 {
     public override void EnterState(AnchorStateManager anchor)
     {
-        anchor._currTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        // anchor._currTarget is now set within PlayerStateManager.UpdateThrowPreview()
+        // anchor._currTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         // anchor._rb.simulated = false;
         anchor._rb.simulated = true;
         anchor._rb.gravityScale = 0;
