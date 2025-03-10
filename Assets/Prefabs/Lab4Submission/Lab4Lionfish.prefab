@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 1037996428675026176}
   - component: {fileID: 8222723132848570433}
   m_Layer: 0
-  m_Name: Lionfish Enemy
+  m_Name: Lab4Lionfish
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
