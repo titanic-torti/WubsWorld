@@ -6,7 +6,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void EnterState(PlayerStateManager anchor)
     {
-        anchor.anim.SetTrigger("jump");
+        // anchor.anim.SetTrigger("jump");
         anchor._rb.AddForce(Vector2.up * anchor.initialJumpStr, ForceMode2D.Impulse);
         _jumpTimer = 0;
     }

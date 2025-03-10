@@ -26,7 +26,7 @@ public class PlayerMoveState : PlayerBaseState
     public override void FixedUpdateState(PlayerStateManager anchor)
     {
         float moveInput = anchor._moveAction.ReadValue<float>();
-        anchor.anim.SetFloat("movement", Mathf.Abs(moveInput));
+        // anchor.anim.SetFloat("movement", Mathf.Abs(moveInput));
         if (!anchor.hookThrown || anchor.hookScript.CheckWithinMaxAnchorDist() || (anchor.hookScript.transform.position - anchor.transform.position).normalized.x * moveInput > 0)
         {
             // apply movement force

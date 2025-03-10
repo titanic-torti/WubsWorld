@@ -20,12 +20,12 @@ public class PlayerStateManager : MonoBehaviour
     public float maxJumpTime;                           // how long player can rise while holding jump button
     public LineRenderer throwPreview;                   // the line drawn showing where the anchor will land before it's thrown
 
-    // ANIMATIONS
-    [Header("Fin Animation")]
-    public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
-    public Animator finAnim;                            // reference to animator of Wub's hand fin
-    public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
-    public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
+    // // ANIMATIONS
+    // [Header("Fin Animation")]
+    // public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
+    // public Animator finAnim;                            // reference to animator of Wub's hand fin
+    // public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
+    // public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
 
     // SFX
     [Header("SFX")]
@@ -36,7 +36,7 @@ public class PlayerStateManager : MonoBehaviour
     [HideInInspector] public Rigidbody2D _rb;           // rigidbody of Wub
     PlayerHealth health;                                // health of Wub (script)
     [HideInInspector] public SpriteRenderer sprite;     // sprite reference to Wub
-    [HideInInspector] public Animator anim;             // main animator controller of Wub
+    // [HideInInspector] public Animator anim;             // main animator controller of Wub
 
     [HideInInspector] public InputAction _moveAction;   // checks for move input
     [HideInInspector] public InputAction _jumpAction;   // checks for jump input
@@ -51,7 +51,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         // get components
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        anim = gameObject.GetComponent<Animator>();
+        // anim = gameObject.GetComponent<Animator>();
 
         _rb = gameObject.GetComponent<Rigidbody2D>();
         health = gameObject.GetComponent<PlayerHealth>();
@@ -80,27 +80,27 @@ public class PlayerStateManager : MonoBehaviour
 
     void Update()
     {
-        UpdateAnchor();
+        // UpdateAnchor();
         UpdateChain();
-        UpdateAnimationGrounded();
+        // UpdateAnimationGrounded();
         UpdateThrowPreview();
         FlipSprite();
         currState.UpdateState(this);
     }
 
-    void UpdateAnchor()
-    {
-        anchorSprite.flipY = sprite.flipX;
-        anchorSprite.flipX = sprite.flipX;
-        if (hookThrown)
-        {
-            anchorSprite.enabled = false;
-        }
-        else
-        {
-            anchorSprite.enabled = true;
-        }
-    }
+    // void UpdateAnchor()
+    // {
+    //     anchorSprite.flipY = sprite.flipX;
+    //     anchorSprite.flipX = sprite.flipX;
+    //     if (hookThrown)
+    //     {
+    //         anchorSprite.enabled = false;
+    //     }
+    //     else
+    //     {
+    //         anchorSprite.enabled = true;
+    //     }
+    // }
 
     void UpdateChain()
     {
@@ -115,17 +115,17 @@ public class PlayerStateManager : MonoBehaviour
         _chainLink.SetPositions(new Vector3[] {gameObject.transform.position, hookScript.transform.position});
     }
 
-    void UpdateAnimationGrounded()
-    {
-        if (jumpCheckScript.IsGrounded())
-        {
-            anim.SetBool("grounded", true);
-        }
-        else
-        {
-            anim.SetBool("grounded", false);
-        }
-    }
+    // void UpdateAnimationGrounded()
+    // {
+    //     if (jumpCheckScript.IsGrounded())
+    //     {
+    //         anim.SetBool("grounded", true);
+    //     }
+    //     else
+    //     {
+    //         anim.SetBool("grounded", false);
+    //     }
+    // }
 
     void UpdateThrowPreview()
     {
@@ -151,7 +151,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        ThrowHook();
+        // ThrowHook();
         currState.FixedUpdateState(this);
     }
 
@@ -159,33 +159,33 @@ public class PlayerStateManager : MonoBehaviour
     {
         // flip sprite if facing wrong direction of movement
         float moveInput = _moveAction.ReadValue<float>();
-        anim.SetFloat("movement", Mathf.Abs(moveInput));
-        if ((moveInput > 0 && !sprite.flipX) || (moveInput < 0 && sprite.flipX))
+        // anim.SetFloat("movement", Mathf.Abs(moveInput));
+        if ((moveInput > 0 && sprite.flipX) || (moveInput < 0 && !sprite.flipX))
         {
             sprite.flipX = !sprite.flipX;
-            finSprite.flipX = !finSprite.flipX;
-            if (finSprite.flipX)
-            {
-                finSprite.transform.position += finOffset;
-                anchorSprite.transform.position += finOffset;
-            }
-            else
-            {
-                finSprite.transform.position -= finOffset;
-                anchorSprite.transform.position -= finOffset;
-            }
+            // finSprite.flipX = !finSprite.flipX;
+            // if (finSprite.flipX)
+            // {
+            //     finSprite.transform.position += finOffset;
+            //     anchorSprite.transform.position += finOffset;
+            // }
+            // else
+            // {
+            //     finSprite.transform.position -= finOffset;
+            //     anchorSprite.transform.position -= finOffset;
+            // }
         }
     }
 
-    void ThrowHook()
-    {
-        // float hookThrowInput = _hookThrow.ReadValue<float>();
-        if (Mouse.current.leftButton.wasReleasedThisFrame && !hookThrown)
-        {
-            anim.SetTrigger("throw");
-            finAnim.SetTrigger("throw");
-        }
-    }
+    // void ThrowHook()
+    // {
+    //     // float hookThrowInput = _hookThrow.ReadValue<float>();
+    //     if (Mouse.current.leftButton.wasReleasedThisFrame && !hookThrown)
+    //     {
+    //         anim.SetTrigger("throw");
+    //         finAnim.SetTrigger("throw");
+    //     }
+    // }
 
     public PlayerBaseState GetState()
     {
