@@ -20,12 +20,13 @@ public class PlayerStateManager : MonoBehaviour
     public float maxJumpTime;                           // how long player can rise while holding jump button
     public LineRenderer throwPreview;                   // the line drawn showing where the anchor will land before it's thrown
 
-    // // ANIMATIONS
-    // [Header("Fin Animation")]
-    // public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
-    // public Animator finAnim;                            // reference to animator of Wub's hand fin
-    // public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
-    // public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
+    // ANIMATIONS
+    [Header("Fin Animation")]
+    public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
+    public Animator finAnim;                            // reference to animator of Wub's hand fin
+    public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
+    public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
+    public Vector3 anchorOffset;                        // when player changes direction, Wub is not perfectly aligned, need offset
 
     // SFX
     [Header("SFX")]
@@ -80,7 +81,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void Update()
     {
-        // UpdateAnchor();
+        UpdateAnchor();
         UpdateChain();
         // UpdateAnimationGrounded();
         UpdateThrowPreview();
@@ -88,19 +89,17 @@ public class PlayerStateManager : MonoBehaviour
         currState.UpdateState(this);
     }
 
-    // void UpdateAnchor()
-    // {
-    //     anchorSprite.flipY = sprite.flipX;
-    //     anchorSprite.flipX = sprite.flipX;
-    //     if (hookThrown)
-    //     {
-    //         anchorSprite.enabled = false;
-    //     }
-    //     else
-    //     {
-    //         anchorSprite.enabled = true;
-    //     }
-    // }
+    void UpdateAnchor()
+    {
+        if (hookThrown)
+        {
+            anchorSprite.enabled = false;
+        }
+        else
+        {
+            anchorSprite.enabled = true;
+        }
+    }
 
     void UpdateChain()
     {
@@ -163,17 +162,19 @@ public class PlayerStateManager : MonoBehaviour
         if ((moveInput > 0 && sprite.flipX) || (moveInput < 0 && !sprite.flipX))
         {
             sprite.flipX = !sprite.flipX;
-            // finSprite.flipX = !finSprite.flipX;
-            // if (finSprite.flipX)
-            // {
-            //     finSprite.transform.position += finOffset;
-            //     anchorSprite.transform.position += finOffset;
-            // }
-            // else
-            // {
-            //     finSprite.transform.position -= finOffset;
-            //     anchorSprite.transform.position -= finOffset;
-            // }
+            finSprite.flipX = !finSprite.flipX;
+            if (finSprite.flipX)
+            {
+                finSprite.transform.position += finOffset;
+                anchorSprite.transform.position += anchorOffset;
+                anchorSprite.transform.Rotate(Vector3.forward, 90);
+            }
+            else
+            {
+                finSprite.transform.position -= finOffset;
+                anchorSprite.transform.position -= anchorOffset;
+                anchorSprite.transform.Rotate(Vector3.forward, -90);
+            }
         }
     }
 
