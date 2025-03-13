@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class AnchorStateManager : MonoBehaviour
 {
     public PlayerStateManager playerScript;         // reference to player script properties
+    public PlayerUpgrades playerUpgrades;           // reference to player upgrades so
 
     // ANCHOR PROPERTIES
     [Header("Anchor Properties")]

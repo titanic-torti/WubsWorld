@@ -15,7 +15,7 @@ public class AnchorHeldState : AnchorBaseState
     {
         anchor.transform.position = anchor.playerScript.transform.position;
 
-        if (anchor._hookThrow.WasReleasedThisFrame()) {
+        if (anchor._hookThrow.WasReleasedThisFrame() && anchor.playerUpgrades.hasAnchor) {
             anchor._sr.enabled = true;
             anchor.playerScript.hookThrown = true;
             anchor.SwitchState(anchor.TossState);

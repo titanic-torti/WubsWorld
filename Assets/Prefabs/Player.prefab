@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 4725203566277786377}
+  playerUpgrades: {fileID: 11400000, guid: 1352c78635657f048af548db5bc08e29, type: 2}
   hookTossSpeed: 40
   hookRetrieveSpeed: 20
   maxAnchorDist: 8
@@ -1778,6 +1779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hookScript: {fileID: 7396312140853319840}
+  playerUpgrades: {fileID: 11400000, guid: 1352c78635657f048af548db5bc08e29, type: 2}
   jumpCheckScript: {fileID: 2610876878963714180}
   moveStr: 10
   jumpStr: 25

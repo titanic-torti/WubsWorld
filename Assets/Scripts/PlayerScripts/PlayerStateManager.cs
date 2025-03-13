@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    public AnchorStateManager hookScript;         // reference to hook script properties
+    public AnchorStateManager hookScript;               // reference to hook script properties
+    [SerializeField] PlayerUpgrades playerUpgrades;     // reference to player upgrades so
 
     // STATES
     PlayerBaseState currState;
@@ -90,7 +91,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void UpdateAnchor()
     {
-        if (hookThrown)
+        if (hookThrown || !playerUpgrades.hasAnchor)
         {
             anchorSprite.enabled = false;
         }
@@ -127,7 +128,7 @@ public class PlayerStateManager : MonoBehaviour
 
     void UpdateThrowPreview()
     {
-        if (Mouse.current.leftButton.isPressed && !hookThrown)
+        if (Mouse.current.leftButton.isPressed && !hookThrown && playerUpgrades.hasAnchor)
         {
             Vector2 origin = _rb.position;
             Vector2 destination;
