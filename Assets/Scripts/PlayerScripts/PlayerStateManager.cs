@@ -24,7 +24,7 @@ public class PlayerStateManager : MonoBehaviour
     // ANIMATIONS
     [Header("Fin Animation")]
     public SpriteRenderer anchorSprite;                 // reference to sprite of Wub's anchor when in held state
-    public Animator finAnim;                            // reference to animator of Wub's hand fin
+    // public Animator finAnim;                            // reference to animator of Wub's hand fin
     public SpriteRenderer finSprite;                    // reference to sprite of Wub's hand fin
     public Vector3 finOffset;                           // when player changes direction, Wub is not perfectly aligned, need offset
     public Vector3 anchorOffset;                        // when player changes direction, Wub is not perfectly aligned, need offset
@@ -35,10 +35,11 @@ public class PlayerStateManager : MonoBehaviour
     public AudioSource step;                            // plays audio when Wub walks, loops
 
     // COMPONENT REFERENCE
+    [Header("Component Reference")]
     [HideInInspector] public Rigidbody2D _rb;           // rigidbody of Wub
     PlayerHealth health;                                // health of Wub (script)
-    [HideInInspector] public SpriteRenderer sprite;     // sprite reference to Wub
-    // [HideInInspector] public Animator anim;             // main animator controller of Wub
+    [SerializeField] public SpriteRenderer sprite;     // sprite reference to Wub
+    [SerializeField] public Animator anim;             // main animator controller of Wub
 
     [HideInInspector] public InputAction _moveAction;   // checks for move input
     [HideInInspector] public InputAction _jumpAction;   // checks for jump input
@@ -52,9 +53,6 @@ public class PlayerStateManager : MonoBehaviour
     void Start()
     {
         // get components
-        sprite = gameObject.GetComponent<SpriteRenderer>();
-        // anim = gameObject.GetComponent<Animator>();
-
         _rb = gameObject.GetComponent<Rigidbody2D>();
         health = gameObject.GetComponent<PlayerHealth>();
         _chainLink = gameObject.GetComponent<LineRenderer>();
@@ -84,7 +82,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         UpdateAnchor();
         UpdateChain();
-        // UpdateAnimationGrounded();
+        UpdateAnimationGrounded();
         UpdateThrowPreview();
         FlipSprite();
         currState.UpdateState(this);
@@ -115,17 +113,17 @@ public class PlayerStateManager : MonoBehaviour
         _chainLink.SetPositions(new Vector3[] {gameObject.transform.position, hookScript.transform.position});
     }
 
-    // void UpdateAnimationGrounded()
-    // {
-    //     if (jumpCheckScript.IsGrounded())
-    //     {
-    //         anim.SetBool("grounded", true);
-    //     }
-    //     else
-    //     {
-    //         anim.SetBool("grounded", false);
-    //     }
-    // }
+    void UpdateAnimationGrounded()
+    {
+        if (jumpCheckScript.IsGrounded())
+        {
+            anim.SetBool("grounded", true);
+        }
+        else
+        {
+            anim.SetBool("grounded", false);
+        }
+    }
 
     void UpdateThrowPreview()
     {
@@ -180,7 +178,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         // flip sprite if facing wrong direction of movement
         float moveInput = _moveAction.ReadValue<float>();
-        // anim.SetFloat("movement", Mathf.Abs(moveInput));
+        anim.SetFloat("movement", Mathf.Abs(moveInput));
         if ((moveInput > 0 && sprite.flipX) || (moveInput < 0 && !sprite.flipX))
         {
             sprite.flipX = !sprite.flipX;
