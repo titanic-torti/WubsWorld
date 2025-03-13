@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Anchor_Metal_Scrape_0: 6757592426711844781
+      Anchor_Metal_Scrape_1: 8092646655371926819
+      Anchor_Metal_Scrape_2: -7417947365077260702
+      Anchor_Metal_Scrape_3: -2552527079053633233
+      Anchor_Metal_Scrape_4: 8604003967431329488
+      Anchor_Metal_Scrape_5: 996035184750711661
+      Anchor_Metal_Scrape_6: 3140775282558585941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

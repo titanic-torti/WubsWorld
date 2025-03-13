@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a45746e8420a6674aa1c431d62fb6372
+guid: c43c705efc124428fb4845cb8fac0e87
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3308379519297663243
-    second: Anchor_2_0
+      213: -5159362228428509745
+    second: Spike_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anchor_2_0
+      name: Spike_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 28
-        height: 28
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b013aede4a9b9ed20800000000000000
-      internalID: 3308379519297663243
+      spriteID: fcd63f283634668b0800000000000000
+      internalID: -5159362228428509745
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Anchor_2_0: 3308379519297663243
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
