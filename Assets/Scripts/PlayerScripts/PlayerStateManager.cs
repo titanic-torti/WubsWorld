@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -130,16 +131,37 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (Mouse.current.leftButton.isPressed && !hookThrown)
         {
-            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector2 diff = worldPos - _rb.position;
+            Vector2 origin = _rb.position;
+            Vector2 destination;
+
+            Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Vector2 diff = worldMousePos - _rb.position;
             
-            if (diff.magnitude > hookScript.maxAnchorDist) {
-                worldPos = _rb.position + (diff.normalized * hookScript.maxAnchorDist);
+            RaycastHit2D raycast = Physics2D.Raycast(origin, diff.normalized, hookScript.maxAnchorDist);
+
+            if (raycast.collider == null)
+            {
+                // if nothing is hit, limit preview distance to max anchor throw distance
+                float distance = Math.Min(diff.magnitude, hookScript.maxAnchorDist);
+                destination = _rb.position + (diff.normalized * distance);
+            }
+            else
+            {
+                if (raycast.collider.tag == "Anchor Point")
+                {
+                    Transform anchorPoint = raycast.collider.GetComponent<Transform>();
+                    destination = anchorPoint.position;
+                }
+                else
+                {
+                    destination = raycast.point;
+                }
             }
 
-            throwPreview.SetPositions(new Vector3[] { _rb.position, worldPos });
-
+            throwPreview.SetPositions(new Vector3[] { _rb.position, destination });
             throwPreview.enabled = true;
+
+            hookScript._currTarget = destination;
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
