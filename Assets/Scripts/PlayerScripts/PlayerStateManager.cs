@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -218,7 +219,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            health.TakeDamage(1);
+            // health.TakeDamage(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             hurt.Play();
         }
         else if (collision.gameObject.CompareTag("Health"))
