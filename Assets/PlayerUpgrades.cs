@@ -14,4 +14,9 @@ public class PlayerUpgrades : ScriptableObject
     {
         hasAnchor = false;
     }
+
+    public void UnlockAnchor()
+    {
+        hasAnchor = true;
+    }
 }
