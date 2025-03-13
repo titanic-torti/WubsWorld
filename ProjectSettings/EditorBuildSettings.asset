@@ -23,9 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Death.unity
     guid: a5d3527cdd38322459b7eb90055b85e5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ProgressReports/Milestone2.unity
     guid: 528f2f5e4122d4f2e9ebe44fde70ab3b
+  - enabled: 1
+    path: Assets/Scenes/Rooms/Level_1.unity
+    guid: 9d89898427d61431ea21ac440a3c77f7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

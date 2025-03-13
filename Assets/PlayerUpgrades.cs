@@ -19,4 +19,9 @@ public class PlayerUpgrades : ScriptableObject
     {
         hasAnchor = true;
     }
+
+    public void ResetUpgrades()
+    {
+        hasAnchor = false;
+    }
 }
