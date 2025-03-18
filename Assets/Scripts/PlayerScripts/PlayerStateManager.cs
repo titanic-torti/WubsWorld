@@ -219,8 +219,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // health.TakeDamage(1);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            health.TakeDamage(1);
             hurt.Play();
         }
         else if (collision.gameObject.CompareTag("Health"))
@@ -232,6 +231,14 @@ public class PlayerStateManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.gameObject.CompareTag("Checkpoint"))
+        {
+            health.SetCheckpoint(collider.gameObject);
+        }
+        else if (collider.gameObject.CompareTag("Respawn"))
+        {
+            health.Respawn();
+        }
         currState.OnTriggerEnter2D(this, collider);
     }
 }

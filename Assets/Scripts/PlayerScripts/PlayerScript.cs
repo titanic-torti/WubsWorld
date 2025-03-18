@@ -49,6 +49,7 @@ public class PlayerScript : MonoBehaviour
         
         _rb = gameObject.GetComponent<Rigidbody2D>();
         health = gameObject.GetComponent<PlayerHealth>();
+        health.rb = _rb;
         _chainLink = gameObject.GetComponent<LineRenderer>();
         _chainLink.enabled = false;
 
@@ -174,4 +175,12 @@ public class PlayerScript : MonoBehaviour
             health.Heal(1);
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Respawn"))
+        {
+            health.Respawn();
+        }
+    } 
 }

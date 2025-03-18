@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public Rigidbody2D rb;
+    public Canvas deathScreen;
+
     [Header("Heart Visuals")]
     [SerializeField] Image[] hearts;             // hearts container
     [SerializeField] Sprite fullHeart;           // filled heart sprite
@@ -14,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int maxHealth;
     [SerializeField] float invulnerabilityFrame; // time player is invulnerable to damage after taking damage
     private float _invulnerabilityTimer;         // track time since last hit
+    
+    private Transform currCheckpoint;            // respawn location
 
     // Update is called once per frame
     void Update()
@@ -52,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currHealth <= 0)
         {
-            SceneManager.LoadSceneAsync(4);
+            Respawn();
         }
     }
 
@@ -71,4 +76,32 @@ public class PlayerHealth : MonoBehaviour
         currHealth = maxHealth;
     }
 
+    public void SetCheckpoint(GameObject checkpoint)
+    {
+        currCheckpoint = checkpoint.GetComponent<Transform>();
+    }
+
+    public void Respawn(bool instantRespawn = false)
+    {
+        if (!instantRespawn) {
+            deathScreen.enabled = true;
+
+            StartCoroutine(ShowDeathScreen());
+            Time.timeScale = 0;
+        }
+
+        FullHeal();
+        rb.position = currCheckpoint.position;
+    }
+
+    private IEnumerator ShowDeathScreen()
+    {
+        while (!Input.GetKeyDown(KeyCode.Return))
+        {
+            yield return null;
+        }
+
+        Time.timeScale = 1;
+        deathScreen.enabled = false;
+    }
 }

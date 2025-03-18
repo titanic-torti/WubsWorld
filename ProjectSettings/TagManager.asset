@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Health
   - Anchor Point
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

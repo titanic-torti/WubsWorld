@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mutant_Blobfish-drip-Sheet_0: -6168067933608080297
+      Mutant_Blobfish-drip-Sheet_1: 3284314431442854276
+      Mutant_Blobfish-drip-Sheet_2: 9186684079592089061
+      Mutant_Blobfish-drip-Sheet_3: 1241294919971840667
+      Mutant_Blobfish-drip-Sheet_4: -8711612229556755967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
