@@ -39,24 +39,23 @@ public class AnchorLatchedState : AnchorBaseState
             anchor.SwitchState(anchor.IdleState);
         }
 
-        // player rappling
-        if (!anchor.playerScript.jumpCheckScript.IsGrounded())
+        // rappel down
+        if (!anchor.playerScript.jumpCheckScript.IsGrounded() && anchor._rappelDown.ReadValue<float>() > 0 && anchor._dj.distance < anchor.maxAnchorDist)
         {
-            // Are these keys okay? Do they feel "natural"?
-            // const KeyCode EXTEND_KEY = KeyCode.S;
-            // const KeyCode RETRACT_KEY = KeyCode.W;
+            Debug.Log("rappel down");
+            anchor._dj.distance += anchor.rappelSpeed * Time.deltaTime;
+        }
 
-            // rappel down
-            if (anchor._rappelDown.ReadValue<float>() > 0 && anchor._dj.distance < anchor.maxAnchorDist)
-            {
-                anchor._dj.distance += anchor.rappelSpeed * Time.deltaTime;
+        // rappel up
+        if (anchor._rappelUp.ReadValue<float>() > 0 && anchor._dj.distance > 1)
+        {
+            if (anchor.playerScript.jumpCheckScript.IsGrounded()) {
+                // apply small force to get player off of the ground,
+                // otherwise rappelling up won't work when grounded
+                Vector2 dist = anchor._rb.position - anchor.playerScript._rb.position;
+                anchor.playerScript._rb.AddForce(dist.normalized * 5);
             }
-
-            // rappel up
-            if (anchor._rappelUp.ReadValue<float>() > 0 && anchor._dj.distance > 1)
-            {
-                anchor._dj.distance -= anchor.rappelSpeed * Time.deltaTime;
-            }
+            anchor._dj.distance -= anchor.rappelSpeed * Time.deltaTime;
         }
     }
 

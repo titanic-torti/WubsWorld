@@ -137,7 +137,7 @@ public class PlayerStateManager : MonoBehaviour
             Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 diff = worldMousePos - _rb.position;
             
-            RaycastHit2D raycast = Physics2D.Raycast(origin, diff.normalized, hookScript.maxAnchorDist);
+            RaycastHit2D raycast = Physics2D.Raycast(origin, diff.normalized, Math.Min(diff.magnitude, hookScript.maxAnchorDist));
 
             if (raycast.collider == null)
             {
