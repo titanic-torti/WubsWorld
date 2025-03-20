@@ -11,6 +11,7 @@ public class AnchorStateManager : MonoBehaviour
     public float hookTossSpeed;                     // how fast the hook is tossed out
     public float hookRetrieveSpeed;                 // how fast the hook is pulled back in
     public float maxAnchorDist;                     // furthest distance anchor can be from player
+    public float maxUpgradedAnchorDist;             // furthest distance anchor can be from player, after distance upgrade is unlocked
     public float closenessBounds;                   // how close hook needs to be to target click before being registered as fully thrown
     public float timeRecoverFromLatch;              // time till anchor checks to latch to any new anchor points
     public float rappelSpeed;                       // speed at which Wub can rappel up and down while latched
@@ -105,7 +106,14 @@ public class AnchorStateManager : MonoBehaviour
 
     public bool CheckWithinMaxAnchorDist()
     {
-        return maxAnchorDist >= (playerScript.transform.position - transform.position).magnitude;
+        return GetMaxAnchorDist() >= (playerScript.transform.position - transform.position).magnitude;
+    }
+
+    public float GetMaxAnchorDist() {
+        if (playerUpgrades.extendRange)
+            return maxUpgradedAnchorDist;
+        else
+            return maxAnchorDist;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

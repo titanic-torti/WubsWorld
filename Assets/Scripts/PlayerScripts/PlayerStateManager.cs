@@ -137,12 +137,12 @@ public class PlayerStateManager : MonoBehaviour
             Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 diff = worldMousePos - _rb.position;
             
-            RaycastHit2D raycast = Physics2D.Raycast(origin, diff.normalized, Math.Min(diff.magnitude, hookScript.maxAnchorDist));
+            RaycastHit2D raycast = Physics2D.Raycast(origin, diff.normalized, Math.Min(diff.magnitude, hookScript.GetMaxAnchorDist()));
 
             if (raycast.collider == null)
             {
                 // if nothing is hit, limit preview distance to max anchor throw distance
-                float distance = Math.Min(diff.magnitude, hookScript.maxAnchorDist);
+                float distance = Math.Min(diff.magnitude, hookScript.GetMaxAnchorDist());
                 destination = _rb.position + (diff.normalized * distance);
             }
             else
