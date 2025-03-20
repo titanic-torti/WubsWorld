@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -91,7 +92,13 @@ public class PlayerHealth : MonoBehaviour
         }
 
         FullHeal();
-        rb.position = currCheckpoint.position;
+        
+        if (currCheckpoint != null) {
+            rb.position = currCheckpoint.position;
+        } else {
+            // fallback to reloading the scene if a checkpoint isn't assigned for whatever reason
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     private IEnumerator ShowDeathScreen()
