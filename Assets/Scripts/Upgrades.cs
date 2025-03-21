@@ -43,6 +43,7 @@ public class Upgrades : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             playerUpgrades.UnlockAnchor();
+            playerUpgrades.AllowRappel();
             Destroy(aura);
             Destroy(gameObject);
         }
