@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/Lab4/Lab4Menu.unity
     guid: 99d07ebf68921394489c8ac210dd0eb9
   - enabled: 0
     path: Assets/Scenes/GameplayTestEnv.unity
@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Credits.unity
     guid: 78ade52ac7ebd594b8429bab7b5087cb
   - enabled: 0
-    path: Assets/Scenes/EndScreen.unity
+    path: Assets/Scenes/Lab4/EndScreen.unity
     guid: 272c0f6cb68b30041a31488677a4be23
   - enabled: 0
     path: Assets/Scenes/Death.unity
