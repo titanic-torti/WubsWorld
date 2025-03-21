@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e7fb1c6b4cf98794b967f0f54554318f
+guid: 2e2c4650abbc93544977df44607a636d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2857712903705814818
-    second: CreditsScreen 1_0
+      213: -6813073394692553995
+    second: CreditsScreen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CreditsScreen 1_0
+      name: CreditsScreen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed89090414d5758d0800000000000000
-      internalID: -2857712903705814818
+      spriteID: 5f28fa048d91371a0800000000000000
+      internalID: -6813073394692553995
       vertices: []
       indices: 
       edges: []
