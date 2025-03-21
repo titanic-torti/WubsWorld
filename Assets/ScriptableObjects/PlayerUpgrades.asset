@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded56a2cd98c74746b410ca6da697d1c, type: 3}
   m_Name: PlayerUpgrades
   m_EditorClassIdentifier: 
-  hasAnchor: 0
+  hasAnchor: 1
+  extendRange: 0
+  allowRappel: 0
