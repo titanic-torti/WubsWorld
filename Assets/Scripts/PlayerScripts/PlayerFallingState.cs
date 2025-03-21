@@ -2,36 +2,36 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState 
 {
-    public override void EnterState(PlayerStateManager anchor)
+    public override void EnterState(PlayerStateManager player)
     {
         
     }
 
-    public override void UpdateState(PlayerStateManager anchor)
+    public override void UpdateState(PlayerStateManager player)
     {
         // switch states
-        if (anchor.jumpCheckScript.IsGrounded())
+        if (player.jumpCheckScript.IsGrounded())
         {
-            anchor.SwitchState(anchor.MoveState);
+            player.SwitchState(player.MoveState);
         }
     }
 
-    public override void FixedUpdateState(PlayerStateManager anchor)
+    public override void FixedUpdateState(PlayerStateManager player)
     {
         // apply movement force
-        float moveInput = anchor._moveAction.ReadValue<float>();
-        if (!anchor.hookThrown || anchor.hookScript.CheckWithinMaxAnchorDist() || (anchor.hookScript.transform.position - anchor.transform.position).normalized.x * moveInput > 0)
+        float moveInput = player._moveAction.ReadValue<float>();
+        if (!player.hookThrown || player.hookScript.CheckWithinMaxAnchorDist() || (player.hookScript.transform.position - player.transform.position).normalized.x * moveInput > 0)
         {
-            anchor._rb.AddForce(new Vector3(moveInput*anchor.moveStr - anchor._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);    
+            player._rb.AddForce(new Vector3(moveInput*player.moveStr - player._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);    
         }
     }
 
-    public override void OnCollisionEnter2D(PlayerStateManager anchor, Collision2D collision)
+    public override void OnCollisionEnter2D(PlayerStateManager player, Collision2D collision)
     {
 
     }
 
-    public override void OnTriggerEnter2D(PlayerStateManager anchor, Collider2D collider)
+    public override void OnTriggerEnter2D(PlayerStateManager player, Collider2D collider)
     {
 
     }

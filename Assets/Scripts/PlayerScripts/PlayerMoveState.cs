@@ -2,55 +2,55 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerBaseState
 {
-    public override void EnterState(PlayerStateManager anchor)
+    public override void EnterState(PlayerStateManager player)
     {
 
     }
 
-    public override void UpdateState(PlayerStateManager anchor)
+    public override void UpdateState(PlayerStateManager player)
     {
         // check for state changes
-        float jumpInput = anchor._jumpAction.ReadValue<float>();
-        if (jumpInput > 0 && anchor.jumpCheckScript.IsGrounded())
+        float jumpInput = player._jumpAction.ReadValue<float>();
+        if (jumpInput > 0 && player.jumpCheckScript.IsGrounded())
         {
-            anchor.step.Stop();
-            anchor.SwitchState(anchor.JumpingState);
+            player.step.Stop();
+            player.SwitchState(player.JumpingState);
         }
-        else if (!anchor.jumpCheckScript.IsGrounded())
+        else if (!player.jumpCheckScript.IsGrounded())
         {
-            anchor.step.Stop();
-            anchor.SwitchState(anchor.FallingState);
+            player.step.Stop();
+            player.SwitchState(player.FallingState);
         }
     }
 
-    public override void FixedUpdateState(PlayerStateManager anchor)
+    public override void FixedUpdateState(PlayerStateManager player)
     {
-        float moveInput = anchor._moveAction.ReadValue<float>();
-        // anchor.anim.SetFloat("movement", Mathf.Abs(moveInput));
-        if (!anchor.hookThrown || anchor.hookScript.CheckWithinMaxAnchorDist() || (anchor.hookScript.transform.position - anchor.transform.position).normalized.x * moveInput > 0)
+        float moveInput = player._moveAction.ReadValue<float>();
+        // player.anim.SetFloat("movement", Mathf.Abs(moveInput));
+        if (!player.hookThrown || player.hookScript.CheckWithinMaxAnchorDist() || (player.hookScript.transform.position - player.transform.position).normalized.x * moveInput > 0)
         {
             // apply movement force
-            anchor._rb.AddForce(new Vector3(moveInput*anchor.moveStr - anchor._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
+            player._rb.AddForce(new Vector3(moveInput*player.moveStr - player._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);
 
             // play movement sound if moving and not already playing
-            if (anchor.step.isPlaying)
+            if (player.step.isPlaying)
             {
-                anchor.step.Play();
+                player.step.Play();
             }
         }
         else
         {
             // stop movement sound if not moving
-            anchor.step.Stop();
+            player.step.Stop();
         }
     }
 
-    public override void OnCollisionEnter2D(PlayerStateManager anchor, Collision2D collision)
+    public override void OnCollisionEnter2D(PlayerStateManager player, Collision2D collision)
     {
 
     }
 
-    public override void OnTriggerEnter2D(PlayerStateManager anchor, Collider2D collider)
+    public override void OnTriggerEnter2D(PlayerStateManager player, Collider2D collider)
     {
 
     }

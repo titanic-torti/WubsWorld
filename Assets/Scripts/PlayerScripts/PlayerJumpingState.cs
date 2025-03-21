@@ -4,42 +4,42 @@ public class PlayerJumpingState : PlayerBaseState
 {
     private float _jumpTimer;
 
-    public override void EnterState(PlayerStateManager anchor)
+    public override void EnterState(PlayerStateManager player)
     {
-        anchor.anim.SetTrigger("jump");
-        anchor._rb.AddForce(Vector2.up * anchor.initialJumpStr, ForceMode2D.Impulse);
+        player.anim.SetTrigger("jump");
+        player._rb.AddForce(Vector2.up * player.initialJumpStr, ForceMode2D.Impulse);
         _jumpTimer = 0;
     }
 
-    public override void UpdateState(PlayerStateManager anchor)
+    public override void UpdateState(PlayerStateManager player)
     {
-        float jumpInput = anchor._jumpAction.ReadValue<float>();
-        if (jumpInput <= 0 || _jumpTimer >= anchor.maxJumpTime)
+        float jumpInput = player._jumpAction.ReadValue<float>();
+        if (jumpInput <= 0 || _jumpTimer >= player.maxJumpTime)
         {
-            anchor.SwitchState(anchor.FallingState);
+            player.SwitchState(player.FallingState);
         }
         _jumpTimer += Time.deltaTime;
     }
 
-    public override void FixedUpdateState(PlayerStateManager anchor)
+    public override void FixedUpdateState(PlayerStateManager player)
     {
         // apply continuous jump force
-        anchor._rb.AddForce(Vector2.up * anchor.jumpStr, ForceMode2D.Force);
+        player._rb.AddForce(Vector2.up * player.jumpStr, ForceMode2D.Force);
 
         // apply movement force
-        float moveInput = anchor._moveAction.ReadValue<float>();
-        if (!anchor.hookThrown || anchor.hookScript.CheckWithinMaxAnchorDist() || (anchor.hookScript.transform.position - anchor.transform.position).normalized.x * moveInput > 0)
+        float moveInput = player._moveAction.ReadValue<float>();
+        if (!player.hookThrown || player.hookScript.CheckWithinMaxAnchorDist() || (player.hookScript.transform.position - player.transform.position).normalized.x * moveInput > 0)
         {
-            anchor._rb.AddForce(new Vector3(moveInput*anchor.moveStr - anchor._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);    
+            player._rb.AddForce(new Vector3(moveInput*player.moveStr - player._rb.linearVelocity.x, 0, 0), ForceMode2D.Force);    
         }
     }
 
-    public override void OnCollisionEnter2D(PlayerStateManager anchor, Collision2D collision)
+    public override void OnCollisionEnter2D(PlayerStateManager player, Collision2D collision)
     {
 
     }
 
-    public override void OnTriggerEnter2D(PlayerStateManager anchor, Collider2D collider)
+    public override void OnTriggerEnter2D(PlayerStateManager player, Collider2D collider)
     {
 
     }
