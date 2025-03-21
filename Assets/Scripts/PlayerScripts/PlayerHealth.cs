@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    Rigidbody2D _rb;
-    public Canvas deathScreen;
+    [SerializeField] Canvas deathScreen;
     [SerializeField] Health health;
-    [SerializeField] float invulnerabilityFrame; // time player is invulnerable to damage after taking damage
-    private float _invulnerabilityTimer;         // track time since last hit
+
+    [SerializeField] float invulnerabilityFrame;    // time player is invulnerable to damage after taking damage
+    float _invulnerabilityTimer;                    // track time since last hit
     
-    private Transform currCheckpoint;            // respawn location
+    Rigidbody2D _rb;
+    Transform currCheckpoint;                       // respawn location
 
     void Start()
     {

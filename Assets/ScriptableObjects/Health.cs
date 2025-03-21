@@ -36,5 +36,9 @@ public class Health : ScriptableObject
         {
             health = 0;
         }
+        else
+        {
+            health = newHealth;
+        }
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
@@ -25,7 +23,7 @@ public class HealthBar : MonoBehaviour
             }
 
             // display num hearts up to max hearts
-            if (i < health.GetCurrHealth()){
+            if (i < health.GetMaxHealth()){
                 hearts[i].enabled = true;
             }else{
                 hearts[i].enabled = false;
