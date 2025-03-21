@@ -70,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
         
         if (currCheckpoint != null) {
             _rb.position = currCheckpoint.position;
-            anchorRb.position = _rb.position;
+            anchorRb.position = currCheckpoint.position;
         } else {
             // fallback to reloading the scene if a checkpoint isn't assigned for whatever reason
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
