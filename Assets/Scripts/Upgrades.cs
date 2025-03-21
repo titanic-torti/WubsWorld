@@ -1,7 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Levitate : MonoBehaviour
+public class Upgrades : MonoBehaviour
 {
+    [Header("Object Reference")]
+    [SerializeField] PlayerUpgrades playerUpgrades;
+    [SerializeField] GameObject aura;
+
     [Header("Float Properties")]
     [SerializeField] float maxOffSetFromStart;
     [SerializeField] float floatSpeed;
@@ -30,6 +35,16 @@ public class Levitate : MonoBehaviour
             (gameObject.transform.position.y <= _startposition.y - maxOffSetFromStart && _reachBottom))
         {
             _reachBottom = !_reachBottom;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            playerUpgrades.UnlockAnchor();
+            Destroy(aura);
+            Destroy(gameObject);
         }
     }
 }
