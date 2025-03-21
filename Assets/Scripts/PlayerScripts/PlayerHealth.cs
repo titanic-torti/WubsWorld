@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Canvas deathScreen;
     [SerializeField] Health health;
+    [SerializeField] Rigidbody2D anchorRb;
 
     [SerializeField] float invulnerabilityFrame;    // time player is invulnerable to damage after taking damage
     float _invulnerabilityTimer;                    // track time since last hit
@@ -69,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
         
         if (currCheckpoint != null) {
             _rb.position = currCheckpoint.position;
+            anchorRb.position = _rb.position;
         } else {
             // fallback to reloading the scene if a checkpoint isn't assigned for whatever reason
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

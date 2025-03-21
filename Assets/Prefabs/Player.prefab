@@ -1940,9 +1940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f7d3e0bb1429d4aaca69f22a6d1e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 7414260460173393961}
   deathScreen: {fileID: 832689973767736836}
   health: {fileID: 11400000, guid: 8045d927477b7604d8382702c06105db, type: 2}
+  anchorRb: {fileID: 4641343743637322151}
   invulnerabilityFrame: 0.2
 --- !u!1 &3616903693174412038
 GameObject:
