@@ -1,50 +1,28 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    Rigidbody2D _rb;
     public Canvas deathScreen;
-
-    [Header("Heart Visuals")]
-    [SerializeField] Image[] hearts;             // hearts container
-    [SerializeField] Sprite fullHeart;           // filled heart sprite
-    [SerializeField] Sprite emptyHeart;          // empty heart sprite
-
-    [Header("Heart Attributes")]
-    [SerializeField] int currHealth;
-    [SerializeField] int maxHealth;
+    [SerializeField] Health health;
     [SerializeField] float invulnerabilityFrame; // time player is invulnerable to damage after taking damage
     private float _invulnerabilityTimer;         // track time since last hit
     
     private Transform currCheckpoint;            // respawn location
 
-    // Update is called once per frame
+    void Start()
+    {
+        _rb = gameObject.GetComponent<Rigidbody2D>();   
+    }
+
     void Update()
     {
-        for (int i = 0; i < hearts.Length; i++){
-
-            // display full or empty heart
-            if (i < currHealth){
-                hearts[i].sprite = fullHeart;
-            }else{
-                hearts[i].sprite = emptyHeart;
-            }
-
-            // display num hearts up to max hearts
-            if (i < maxHealth){
-                hearts[i].enabled = true;
-            }else{
-                hearts[i].enabled = false;
-            }
-
-            // modulate invulnerability timer
-            if (_invulnerabilityTimer > 0)
-            {
-                _invulnerabilityTimer -= Time.deltaTime;
-            }
+        // modulate invulnerability timer
+        if (_invulnerabilityTimer > 0)
+        {
+            _invulnerabilityTimer -= Time.deltaTime;
         }
     }
 
@@ -52,11 +30,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_invulnerabilityTimer <= 0)
         {
-            currHealth -= amount;
+            health.UpdateHealth(health.GetCurrHealth() - amount);
             _invulnerabilityTimer = invulnerabilityFrame;
         }
 
-        if (currHealth <= 0)
+        if (health.GetCurrHealth() <= 0)
         {
             Respawn();
         }
@@ -64,17 +42,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(int amount)
     {
-        currHealth += amount;
-
-        if (currHealth > maxHealth)
-        {
-            currHealth = maxHealth;
-        }
+        health.UpdateHealth(health.GetCurrHealth() + amount);
     }
 
     public void FullHeal()
     {
-        currHealth = maxHealth;
+        health.UpdateHealth(health.GetMaxHealth());
     }
 
     public void SetCheckpoint(GameObject checkpoint)
@@ -94,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
         FullHeal();
         
         if (currCheckpoint != null) {
-            rb.position = currCheckpoint.position;
+            _rb.position = currCheckpoint.position;
         } else {
             // fallback to reloading the scene if a checkpoint isn't assigned for whatever reason
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
